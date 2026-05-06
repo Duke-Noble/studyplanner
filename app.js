@@ -73,6 +73,8 @@ loginBtn.addEventListener('click', async () => {
     authError.innerText = 'Invalid registration number.';
     return;
   }
+  console.log("Login button:", loginBtn);
+alert("Script loaded");
   const email = 'vida@studydesk.local';
   const password = 'Vida2025!';
   let { error } = await supabase.auth.signInWithPassword({ email, password });
