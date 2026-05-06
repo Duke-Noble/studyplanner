@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>StudyPlanner – Vida Arthur</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Supabase JS client -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <!-- Our app logic -->
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div id="app">
+    <!-- Auth screen (visible until logged in) -->
+    <div id="auth-screen" class="screen active">
+      <div class="auth-card">
+        <div class="logo">📚 StudyPlanner</div>
+        <div class="university">University of Cape Coast</div>
+        <h2>Welcome, Vida</h2>
+        <p>Enter your registration number to continue</p>
+        <input type="text" id="reg-number" placeholder="EH/GOV/25/0128" value="EH/GOV/25/0128">
+        <button id="login-btn" class="btn-primary">Access Dashboard</button>
+        <div id="auth-error" class="error-msg"></div>
+      </div>
+    </div>
+
+    <!-- Main dashboard (hidden until auth) -->
+    <div id="dashboard-screen" class="screen">
+      <!-- Sidebar / bottom navigation will be replaced by a mobile-friendly tab bar -->
+      <div class="mobile-nav">
+        <button data-tab="dashboard" class="nav-btn active">🏠</button>
+        <button data-tab="courses" class="nav-btn">📚</button>
+        <button data-tab="calendar" class="nav-btn">📅</button>
+        <button data-tab="timetable" class="nav-btn">⏰</button>
+        <button data-tab="notes" class="nav-btn">📝</button>
+        <button data-tab="profile" class="nav-btn">👤</button>
+      </div>
+
+      <div class="main-content">
+        <!-- Dashboard tab -->
+        <div id="dashboard-tab" class="tab active">
+          <div class="welcome-header">
+            <h1>Hello, Vida 👋</h1>
+            <p class="reg-no">EH/GOV/25/0128 · B.Ed Government</p>
+          </div>
+          <div class="stats-grid" id="stats-grid"></div>
+          <div class="upcoming-section">
+            <h2>Upcoming</h2>
+            <div id="upcoming-list"></div>
+          </div>
+          <div class="overdue-section">
+            <h2>Overdue</h2>
+            <div id="overdue-list"></div>
+          </div>
+        </div>
+
+        <!-- Courses tab (read-only, hardcoded) -->
+        <div id="courses-tab" class="tab">
+          <h2>My Courses</h2>
+          <div id="courses-list" class="courses-grid"></div>
+        </div>
+
+        <!-- Calendar tab -->
+        <div id="calendar-tab" class="tab">
+          <div class="calendar-header">
+            <button id="prev-month">◀</button>
+            <span id="month-year"></span>
+            <button id="next-month">▶</button>
+          </div>
+          <div class="calendar-grid" id="calendar-grid"></div>
+          <div id="calendar-events" class="calendar-events"></div>
+        </div>
+
+        <!-- Timetable tab (interactive grid, click to edit) -->
+        <div id="timetable-tab" class="tab">
+          <h2>Weekly Timetable</h2>
+          <div id="timetable-container" class="timetable-container"></div>
+        </div>
+
+        <!-- Notes tab -->
+        <div id="notes-tab" class="tab">
+          <button id="new-note-btn" class="btn-primary">+ New Note</button>
+          <div id="notes-list" class="notes-list"></div>
+        </div>
+
+        <!-- Profile tab -->
+        <div id="profile-tab" class="tab">
+          <div class="profile-header">
+            <div class="avatar">VA</div>
+            <h3>Vida Arthur</h3>
+            <p>EH/GOV/25/0128</p>
+          </div>
+          <button id="logout-btn" class="btn-secondary">Sign Out</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for adding/editing items (assignments, notes, timetable slots, etc.) -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h3 id="modal-title">Add Item</h3>
+      <form id="modal-form">
+        <!-- dynamic fields will be inserted by JS -->
+        <div id="modal-fields"></div>
+        <button type="submit" class="btn-primary">Save</button>
+        <button type="button" id="modal-delete" class="btn-danger" style="display:none">Delete</button>
+      </form>
+    </div>
+  </div>
+</body>
+  </html>
