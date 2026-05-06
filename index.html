@@ -4,15 +4,385 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>StudyPlanner – Vida Arthur</title>
-  <link rel="stylesheet" href="style.css">
-  <!-- Supabase JS client -->
+  <style>
+    :root {
+      --blush: #f9e4e0;
+      --lavender: #e6e6fa;
+      --sage: #d4e2d4;
+      --coral: #f4a261;
+      --deep-rose: #b56576;
+      --plum: #6d597a;
+      --dark-text: #2d3e50;
+      --light-text: #ffffff;
+      --shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, system-ui, sans-serif; }
+    body { background: #fef7f2; color: var(--dark-text); line-height: 1.5; }
+    .screen { display: none; min-height: 100vh; padding-bottom: 70px; }
+    .screen.active { display: block; }
+    .auth-card {
+      background: white; margin: 30vh auto 0; width: 90%; max-width: 320px; padding: 2rem;
+      border-radius: 32px; box-shadow: var(--shadow); text-align: center;
+    }
+    .logo { font-size: 2rem; font-weight: 600; color: var(--deep-rose); }
+    .university { font-size: 0.75rem; color: var(--plum); margin-bottom: 1rem; }
+    .auth-card input { width: 100%; padding: 12px; margin: 1rem 0; border: 1px solid #f0d5cf; border-radius: 40px; font-size: 1rem; background: #fffaf8; }
+    .btn-primary { background: var(--deep-rose); color: white; border: none; padding: 12px 20px; border-radius: 40px; font-weight: 600; width: 100%; cursor: pointer; transition: 0.2s; }
+    .btn-primary:hover { background: #9e4e6b; }
+    .btn-secondary { background: var(--lavender); color: var(--dark-text); border: none; padding: 10px 16px; border-radius: 40px; font-weight: 500; cursor: pointer; }
+    .btn-danger { background: #f0d5cf; color: #c33; border: none; padding: 8px 16px; border-radius: 40px; cursor: pointer; }
+    .error-msg { color: #c33; font-size: 0.8rem; margin-top: 8px; }
+    .mobile-nav {
+      position: fixed; bottom: 0; left: 0; right: 0; background: rgba(255,255,255,0.96); backdrop-filter: blur(10px);
+      display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #f0d5cf; z-index: 100;
+    }
+    .nav-btn { background: none; border: none; font-size: 1.6rem; padding: 6px; color: #b0a4b5; cursor: pointer; transition: 0.2s; }
+    .nav-btn.active { color: var(--deep-rose); transform: scale(1.1); }
+    .main-content { padding: 20px 16px 80px 16px; }
+    .stats-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 14px; margin: 20px 0; }
+    .stat-card { background: white; border-radius: 24px; padding: 16px; text-align: center; box-shadow: var(--shadow); border: 1px solid #f8e6e2; }
+    .stat-number { font-size: 2rem; font-weight: 700; color: var(--deep-rose); }
+    .stat-label { font-size: 0.8rem; color: var(--plum); }
+    .event-item { background: white; border-radius: 20px; padding: 14px; margin-bottom: 10px; border-left: 6px solid var(--coral); box-shadow: var(--shadow); }
+    .event-title { font-weight: 600; }
+    .event-meta { font-size: 0.75rem; color: #7a6e7a; margin-top: 4px; }
+    .overdue-item { border-left-color: #e63946; }
+    .courses-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; margin-top: 16px; }
+    .course-card { background: white; border-radius: 20px; padding: 12px; box-shadow: var(--shadow); }
+    .course-code { font-weight: 700; color: var(--deep-rose); }
+    .course-title { font-size: 0.75rem; color: #5d4a5a; }
+    .calendar-header { display: flex; justify-content: space-between; align-items: center; margin: 20px 0; }
+    .calendar-grid { display: grid; grid-template-columns: repeat(7,1fr); gap: 4px; background: white; border-radius: 24px; padding: 12px; }
+    .cal-day { text-align: center; padding: 8px 0; border-radius: 40px; font-size: 0.8rem; cursor: pointer; }
+    .cal-day.event-day { background: var(--blush); font-weight: bold; color: var(--deep-rose); }
+    .calendar-events { margin-top: 16px; }
+    .timetable-container { overflow-x: auto; }
+    .timetable { width: 100%; border-collapse: collapse; background: white; border-radius: 20px; }
+    .timetable th, .timetable td { border: 1px solid #f0c8c0; padding: 8px 4px; text-align: center; font-size: 0.7rem; }
+    .timetable td { cursor: pointer; background: #fff; }
+    .timetable td.slot-filled { background: var(--lavender); font-weight: 500; }
+    .notes-list { margin-top: 16px; }
+    .note-card { background: white; padding: 14px; border-radius: 20px; margin-bottom: 12px; box-shadow: var(--shadow); }
+    .note-title { font-weight: 700; }
+    .note-preview { font-size: 0.8rem; color: #7a6e7a; margin-top: 4px; }
+    .profile-header { text-align: center; margin: 20px 0; }
+    .avatar { width: 80px; height: 80px; background: var(--deep-rose); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: white; margin: 0 auto 16px; }
+    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); align-items: center; justify-content: center; z-index: 200; }
+    .modal-content { background: white; width: 90%; max-width: 380px; border-radius: 32px; padding: 20px; position: relative; }
+    .close { position: absolute; right: 20px; top: 10px; font-size: 1.5rem; cursor: pointer; }
+    .tab { display: none; }
+    .tab.active { display: block; }
+  </style>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <!-- Our app logic -->
-  <script src="app.js" defer></script>
+  <script>
+    // ---------- CONFIGURATION ----------
+    const SUPABASE_URL = 'https://wlipykzhlysdkwtqfcbl.supabase.co';
+    const SUPABASE_ANON_KEY = 'YOUR_NEW_ANON_KEY_HERE'; // <--- REPLACE WITH YOUR ACTUAL KEY
+
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    // Hardcoded courses
+    const courses = [
+      { id: 1, code: "ASP116A", title: "Conflict Management and Prevention", color: "#f4a261" },
+      { id: 2, code: "CMS108", title: "Communicative Skills", color: "#e6b8a2" },
+      { id: 3, code: "EGS102", title: "Introduction to the Constitution of Ghana", color: "#d9bf77" },
+      { id: 4, code: "EGS104", title: "Politics and Political Institutions in Ghana", color: "#b7b8c4" },
+      { id: 5, code: "EGS106", title: "Government for Senior High Schools", color: "#c9ada7" },
+      { id: 6, code: "EPS101A", title: "Educational Psychology", color: "#aec5b0" },
+      { id: 7, code: "HIS104", title: "Survey of the History of Ghana in the 19th Century", color: "#e3b8b1" },
+      { id: 8, code: "ITS101", title: "Information Technology Skills", color: "#c2a5cf" }
+    ];
+
+    let currentUser = null;
+    let assignments = [], assessments = [], quizzes = [], deadlines = [], notes = [], timetableSlots = [], calendarEvents = [];
+    let currentDate = new Date();
+    let currentModalConfig = { type: null, id: null, day: null, time: null };
+
+    // DOM elements
+    const authScreen = document.getElementById('auth-screen');
+    const dashboardScreen = document.getElementById('dashboard-screen');
+    const regInput = document.getElementById('reg-number');
+    const loginBtn = document.getElementById('login-btn');
+    const authError = document.getElementById('auth-error');
+    const logoutBtn = document.getElementById('logout-btn');
+    const statsGrid = document.getElementById('stats-grid');
+    const upcomingList = document.getElementById('upcoming-list');
+    const overdueList = document.getElementById('overdue-list');
+    const coursesList = document.getElementById('courses-list');
+    const monthYearSpan = document.getElementById('month-year');
+    const calendarGrid = document.getElementById('calendar-grid');
+    const calendarEventsDiv = document.getElementById('calendar-events');
+    const timetableContainer = document.getElementById('timetable-container');
+    const notesList = document.getElementById('notes-list');
+    const newNoteBtn = document.getElementById('new-note-btn');
+    const modal = document.getElementById('modal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalForm = document.getElementById('modal-form');
+    const modalFields = document.getElementById('modal-fields');
+    const modalDeleteBtn = document.getElementById('modal-delete');
+    const closeModal = document.querySelector('.close');
+
+    // Helper: show tab
+    function showTab(tabId) {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.getElementById(`${tabId}-tab`).classList.add('active');
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+      document.querySelector(`[data-tab="${tabId}"]`).classList.add('active');
+      if (tabId === 'calendar') renderCalendar();
+      if (tabId === 'timetable') renderTimetable();
+    }
+
+    // Data loaders
+    async function loadAssignments() { const { data } = await supabase.from('assignments').select('*').order('due_date'); if (data) assignments = data; }
+    async function loadAssessments() { const { data } = await supabase.from('assessments').select('*').order('due_date'); if (data) assessments = data; }
+    async function loadQuizzes() { const { data } = await supabase.from('quizzes').select('*').order('date_time'); if (data) quizzes = data; }
+    async function loadDeadlines() { const { data } = await supabase.from('deadlines').select('*').order('due_date'); if (data) deadlines = data; }
+    async function loadNotes() { const { data } = await supabase.from('notes').select('*').order('updated_at', { ascending: false }); if (data) notes = data; }
+    async function loadTimetableSlots() { const { data } = await supabase.from('timetable_slots').select('*'); if (data) timetableSlots = data; }
+    async function loadEventsForCalendar() {
+      const events = [];
+      assignments.forEach(a => events.push({ id: a.id, title: a.title, date: a.due_date, type: 'assignment', color: '#f4a261' }));
+      assessments.forEach(a => events.push({ id: a.id, title: a.title, date: a.due_date, type: 'assessment', color: '#b56576' }));
+      quizzes.forEach(q => events.push({ id: q.id, title: q.title, date: q.date_time, type: 'quiz', color: '#6d597a' }));
+      deadlines.forEach(d => events.push({ id: d.id, title: d.title, date: d.due_date, type: 'deadline', color: '#e63946' }));
+      calendarEvents = events;
+    }
+
+    async function loadAllData() {
+      await Promise.all([loadAssignments(), loadAssessments(), loadQuizzes(), loadDeadlines(), loadNotes(), loadTimetableSlots(), loadEventsForCalendar()]);
+      renderDashboard();
+      renderCourses();
+      renderCalendar();
+      renderTimetable();
+      renderNotes();
+    }
+
+    // Dashboard rendering
+    function renderDashboard() {
+      const now = new Date();
+      const upcoming = [...assignments, ...assessments, ...quizzes, ...deadlines]
+        .filter(item => new Date(item.due_date || item.date_time) > now)
+        .sort((a,b) => new Date(a.due_date || a.date_time) - new Date(b.due_date || b.date_time))
+        .slice(0, 5);
+      const overdue = [...assignments, ...assessments, ...deadlines]
+        .filter(item => new Date(item.due_date || item.date_time) < now && item.status !== 'Done' && item.status !== 'Graded');
+      statsGrid.innerHTML = `
+        <div class="stat-card"><div class="stat-number">${assignments.length}</div><div class="stat-label">Assignments</div></div>
+        <div class="stat-card"><div class="stat-number">${assessments.length}</div><div class="stat-label">Assessments</div></div>
+        <div class="stat-card"><div class="stat-number">${quizzes.length}</div><div class="stat-label">Quizzes</div></div>
+        <div class="stat-card"><div class="stat-number">${deadlines.length}</div><div class="stat-label">Deadlines</div></div>
+      `;
+      upcomingList.innerHTML = upcoming.map(item => `<div class="event-item"><div class="event-title">${item.title}</div><div class="event-meta">${item.due_date || item.date_time} · ${item.type || 'task'}</div></div>`).join('') || '<div class="event-item">No upcoming events</div>';
+      overdueList.innerHTML = overdue.map(item => `<div class="event-item overdue-item"><div class="event-title">${item.title}</div><div class="event-meta">Due: ${item.due_date || item.date_time}</div></div>`).join('') || '<div class="event-item">All caught up! ✅</div>';
+    }
+
+    function renderCourses() {
+      coursesList.innerHTML = courses.map(c => `<div class="course-card"><div class="course-code">${c.code}</div><div class="course-title">${c.title}</div></div>`).join('');
+    }
+
+    // Calendar
+    function renderCalendar() {
+      const year = currentDate.getFullYear(), month = currentDate.getMonth();
+      const firstDay = new Date(year, month, 1).getDay();
+      const daysInMonth = new Date(year, month+1, 0).getDate();
+      monthYearSpan.innerText = currentDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+      let gridHtml = '<div class="cal-day">S</div><div class="cal-day">M</div><div class="cal-day">T</div><div class="cal-day">W</div><div class="cal-day">T</div><div class="cal-day">F</div><div class="cal-day">S</div>';
+      for (let i=0; i<firstDay; i++) gridHtml += '<div class="cal-day"></div>';
+      for (let d=1; d<=daysInMonth; d++) {
+        const dateStr = `${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+        const hasEvent = calendarEvents.some(e => e.date.startsWith(dateStr));
+        gridHtml += `<div class="cal-day ${hasEvent ? 'event-day' : ''}" data-day="${d}">${d}</div>`;
+      }
+      calendarGrid.innerHTML = gridHtml;
+      document.querySelectorAll('.cal-day[data-day]').forEach(div => {
+        div.addEventListener('click', () => showEventsForDay(parseInt(div.dataset.day)));
+      });
+      showEventsForDay(1);
+    }
+    function showEventsForDay(day) {
+      const year = currentDate.getFullYear(), month = currentDate.getMonth();
+      const dateStr = `${year}-${String(month+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+      const events = calendarEvents.filter(e => e.date.startsWith(dateStr));
+      calendarEventsDiv.innerHTML = events.length ? events.map(e => `<div class="event-item" style="border-left-color:${e.color}"><div class="event-title">${e.title}</div><div class="event-meta">${e.type}</div></div>`).join('') : '<div>No events this day</div>';
+    }
+    document.getElementById('prev-month')?.addEventListener('click', () => { currentDate.setMonth(currentDate.getMonth()-1); renderCalendar(); });
+    document.getElementById('next-month')?.addEventListener('click', () => { currentDate.setMonth(currentDate.getMonth()+1); renderCalendar(); });
+
+    // Timetable
+    const days = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+    const timeSlots = Array.from({length: 31}, (_,i) => `${Math.floor(6.5+i*0.5)}:${i%2===0?'00':'30'}`);
+    function renderTimetable() {
+      let table = '<table class="timetable"><tr><th>Time</th>' + days.map(d => `<th>${d.slice(0,3)}</th>`).join('') + '</tr>';
+      for (let time of timeSlots) {
+        table += `<tr><td>${time}</td>`;
+        for (let day of days) {
+          const slot = timetableSlots.find(s => s.day === day && s.start_time === time);
+          const filled = !!slot;
+          table += `<td class="${filled ? 'slot-filled' : ''}" data-day="${day}" data-time="${time}">${filled ? (slot.course_code || 'Class') : ''}</td>`;
+        }
+        table += '</tr>';
+      }
+      table += '</table>';
+      timetableContainer.innerHTML = table;
+      document.querySelectorAll('.timetable td[data-day]').forEach(cell => {
+        cell.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const day = cell.dataset.day, time = cell.dataset.time;
+          const existing = timetableSlots.find(s => s.day === day && s.start_time === time);
+          openTimetableModal(day, time, existing);
+        });
+      });
+    }
+    function openTimetableModal(day, time, existing) {
+      currentModalConfig = { type: 'timetable', id: existing?.id, day, time };
+      modalTitle.innerText = existing ? 'Edit Slot' : 'Add Slot';
+      modalFields.innerHTML = `
+        <select id="modal-course-id"><option value="">-- Select course --</option>${courses.map(c => `<option value="${c.id}" ${existing?.course_id == c.id ? 'selected' : ''}>${c.code}</option>`).join('')}</select>
+        <input type="text" id="modal-label" placeholder="Custom label (optional)" value="${existing?.label || ''}">
+        <input type="time" id="modal-start" value="${existing?.start_time || time}" required>
+        <input type="time" id="modal-end" value="${existing?.end_time || ''}">
+      `;
+      modal.style.display = 'flex';
+      modalDeleteBtn.style.display = existing ? 'inline-block' : 'none';
+      modalForm.onsubmit = async (e) => {
+        e.preventDefault();
+        const courseId = document.getElementById('modal-course-id').value;
+        const label = document.getElementById('modal-label').value;
+        const start = document.getElementById('modal-start').value;
+        const end = document.getElementById('modal-end').value;
+        const course = courses.find(c => c.id == courseId);
+        const slotData = { day, start_time: start, end_time: end, course_id: courseId || null, label: label || null, course_code: course?.code || null };
+        if (existing) await supabase.from('timetable_slots').update(slotData).eq('id', existing.id);
+        else await supabase.from('timetable_slots').insert([slotData]);
+        await loadTimetableSlots();
+        renderTimetable();
+        modal.style.display = 'none';
+      };
+    }
+
+    // Notes
+    function renderNotes() {
+      notesList.innerHTML = notes.map(n => `
+        <div class="note-card" data-id="${n.id}">
+          <div class="note-title">${n.title}</div>
+          <div class="note-preview">${n.content?.substring(0,80) || ''}</div>
+          <button class="edit-note-btn btn-secondary" style="margin-top:8px">Edit</button>
+          <button class="delete-note-btn btn-secondary" style="margin-top:8px; background:#f0d5cf;">Delete</button>
+        </div>
+      `).join('');
+      document.querySelectorAll('.edit-note-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const noteId = btn.closest('.note-card').dataset.id;
+          const note = notes.find(n => n.id == noteId);
+          openNoteModal(note);
+        });
+      });
+      document.querySelectorAll('.delete-note-btn').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const noteId = btn.closest('.note-card').dataset.id;
+          if (confirm('Delete this note?')) {
+            await supabase.from('notes').delete().eq('id', noteId);
+            await loadNotes();
+            renderNotes();
+          }
+        });
+      });
+    }
+    newNoteBtn.addEventListener('click', () => openNoteModal(null));
+    function openNoteModal(note) {
+      currentModalConfig = { type: 'note', id: note?.id };
+      modalTitle.innerText = note ? 'Edit Note' : 'New Note';
+      modalFields.innerHTML = `<input type="text" id="note-title" placeholder="Title" value="${note?.title || ''}" required><textarea id="note-content" placeholder="Write your note here..." rows="4">${note?.content || ''}</textarea>`;
+      modal.style.display = 'flex';
+      modalDeleteBtn.style.display = note ? 'inline-block' : 'none';
+      modalForm.onsubmit = async (e) => {
+        e.preventDefault();
+        const title = document.getElementById('note-title').value;
+        const content = document.getElementById('note-content').value;
+        if (note) await supabase.from('notes').update({ title, content, updated_at: new Date() }).eq('id', note.id);
+        else await supabase.from('notes').insert([{ title, content, updated_at: new Date() }]);
+        await loadNotes();
+        renderNotes();
+        modal.style.display = 'none';
+      };
+    }
+
+    // Modal delete handler
+    modalDeleteBtn.addEventListener('click', async () => {
+      if (currentModalConfig.type === 'timetable' && currentModalConfig.id) {
+        await supabase.from('timetable_slots').delete().eq('id', currentModalConfig.id);
+        await loadTimetableSlots();
+        renderTimetable();
+      }
+      if (currentModalConfig.type === 'note' && currentModalConfig.id) {
+        await supabase.from('notes').delete().eq('id', currentModalConfig.id);
+        await loadNotes();
+        renderNotes();
+      }
+      modal.style.display = 'none';
+    });
+    closeModal.onclick = () => modal.style.display = 'none';
+    window.onclick = (e) => { if (e.target === modal) modal.style.display = 'none'; };
+
+    // Authentication
+    async function initAuth() {
+      const { data } = await supabase.auth.getSession();
+      if (data.session) {
+        currentUser = data.session.user;
+        authScreen.classList.remove('active');
+        dashboardScreen.classList.add('active');
+        loadAllData();
+      }
+    }
+    loginBtn.addEventListener('click', async () => {
+      const regNo = regInput.value.trim().toUpperCase();
+      if (regNo !== 'EH/GOV/25/0128') {
+        authError.innerText = 'Invalid registration number.';
+        return;
+      }
+      const email = 'vida@studydesk.local';
+      const password = 'Vida2025!';
+      let { error } = await supabase.auth.signInWithPassword({ email, password });
+      if (error && error.message.includes('Invalid login')) {
+        const { error: signUpError } = await supabase.auth.signUp({
+          email, password,
+          options: { data: { reg_no: regNo, name: 'Vida Arthur' } }
+        });
+        if (signUpError) {
+          authError.innerText = signUpError.message;
+          return;
+        }
+        const { error: loginError } = await supabase.auth.signInWithPassword({ email, password });
+        if (loginError) {
+          authError.innerText = loginError.message;
+          return;
+        }
+      } else if (error) {
+        authError.innerText = error.message;
+        return;
+      }
+      currentUser = (await supabase.auth.getUser()).data.user;
+      authScreen.classList.remove('active');
+      dashboardScreen.classList.add('active');
+      loadAllData();
+    });
+    logoutBtn.addEventListener('click', async () => {
+      await supabase.auth.signOut();
+      currentUser = null;
+      authScreen.classList.add('active');
+      dashboardScreen.classList.remove('active');
+    });
+
+    // Tab navigation listeners
+    document.querySelectorAll('.nav-btn').forEach(btn => {
+      btn.addEventListener('click', () => showTab(btn.dataset.tab));
+    });
+
+    initAuth();
+  </script>
 </head>
 <body>
   <div id="app">
-    <!-- Auth screen (visible until logged in) -->
     <div id="auth-screen" class="screen active">
       <div class="auth-card">
         <div class="logo">📚 StudyPlanner</div>
@@ -24,10 +394,7 @@
         <div id="auth-error" class="error-msg"></div>
       </div>
     </div>
-
-    <!-- Main dashboard (hidden until auth) -->
     <div id="dashboard-screen" class="screen">
-      <!-- Sidebar / bottom navigation will be replaced by a mobile-friendly tab bar -->
       <div class="mobile-nav">
         <button data-tab="dashboard" class="nav-btn active">🏠</button>
         <button data-tab="courses" class="nav-btn">📚</button>
@@ -36,79 +403,24 @@
         <button data-tab="notes" class="nav-btn">📝</button>
         <button data-tab="profile" class="nav-btn">👤</button>
       </div>
-
       <div class="main-content">
-        <!-- Dashboard tab -->
         <div id="dashboard-tab" class="tab active">
-          <div class="welcome-header">
-            <h1>Hello, Vida 👋</h1>
-            <p class="reg-no">EH/GOV/25/0128 · B.Ed Government</p>
-          </div>
+          <div class="welcome-header"><h1>Hello, Vida 👋</h1><p class="reg-no">EH/GOV/25/0128 · B.Ed Government</p></div>
           <div class="stats-grid" id="stats-grid"></div>
-          <div class="upcoming-section">
-            <h2>Upcoming</h2>
-            <div id="upcoming-list"></div>
-          </div>
-          <div class="overdue-section">
-            <h2>Overdue</h2>
-            <div id="overdue-list"></div>
-          </div>
+          <div class="upcoming-section"><h2>Upcoming</h2><div id="upcoming-list"></div></div>
+          <div class="overdue-section"><h2>Overdue</h2><div id="overdue-list"></div></div>
         </div>
-
-        <!-- Courses tab (read-only, hardcoded) -->
-        <div id="courses-tab" class="tab">
-          <h2>My Courses</h2>
-          <div id="courses-list" class="courses-grid"></div>
-        </div>
-
-        <!-- Calendar tab -->
+        <div id="courses-tab" class="tab"><h2>My Courses</h2><div id="courses-list" class="courses-grid"></div></div>
         <div id="calendar-tab" class="tab">
-          <div class="calendar-header">
-            <button id="prev-month">◀</button>
-            <span id="month-year"></span>
-            <button id="next-month">▶</button>
-          </div>
-          <div class="calendar-grid" id="calendar-grid"></div>
-          <div id="calendar-events" class="calendar-events"></div>
+          <div class="calendar-header"><button id="prev-month">◀</button><span id="month-year"></span><button id="next-month">▶</button></div>
+          <div class="calendar-grid" id="calendar-grid"></div><div id="calendar-events" class="calendar-events"></div>
         </div>
-
-        <!-- Timetable tab (interactive grid, click to edit) -->
-        <div id="timetable-tab" class="tab">
-          <h2>Weekly Timetable</h2>
-          <div id="timetable-container" class="timetable-container"></div>
-        </div>
-
-        <!-- Notes tab -->
-        <div id="notes-tab" class="tab">
-          <button id="new-note-btn" class="btn-primary">+ New Note</button>
-          <div id="notes-list" class="notes-list"></div>
-        </div>
-
-        <!-- Profile tab -->
-        <div id="profile-tab" class="tab">
-          <div class="profile-header">
-            <div class="avatar">VA</div>
-            <h3>Vida Arthur</h3>
-            <p>EH/GOV/25/0128</p>
-          </div>
-          <button id="logout-btn" class="btn-secondary">Sign Out</button>
-        </div>
+        <div id="timetable-tab" class="tab"><h2>Weekly Timetable</h2><div id="timetable-container" class="timetable-container"></div></div>
+        <div id="notes-tab" class="tab"><button id="new-note-btn" class="btn-primary">+ New Note</button><div id="notes-list" class="notes-list"></div></div>
+        <div id="profile-tab" class="tab"><div class="profile-header"><div class="avatar">VA</div><h3>Vida Arthur</h3><p>EH/GOV/25/0128</p></div><button id="logout-btn" class="btn-secondary">Sign Out</button></div>
       </div>
     </div>
   </div>
-
-  <!-- Modal for adding/editing items (assignments, notes, timetable slots, etc.) -->
-  <div id="modal" class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <h3 id="modal-title">Add Item</h3>
-      <form id="modal-form">
-        <!-- dynamic fields will be inserted by JS -->
-        <div id="modal-fields"></div>
-        <button type="submit" class="btn-primary">Save</button>
-        <button type="button" id="modal-delete" class="btn-danger" style="display:none">Delete</button>
-      </form>
-    </div>
-  </div>
+  <div id="modal" class="modal"><div class="modal-content"><span class="close">&times;</span><h3 id="modal-title">Add Item</h3><form id="modal-form"><div id="modal-fields"></div><button type="submit" class="btn-primary">Save</button><button type="button" id="modal-delete" class="btn-danger" style="display:none">Delete</button></form></div></div>
 </body>
-  </html>
+</html>
