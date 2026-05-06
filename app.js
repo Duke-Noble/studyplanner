@@ -1,7 +1,7 @@
 // app.js – Complete StudyPlanner for Vida Arthur
 
-const SUPABASE_URL = 'https://wlipykzhlysdkwtqfcbl.supabase.co';
-const SUPABASE_ANON_KEY = 'YOUR_NEW_ANON_KEY_HERE';  // Replace with your key
+const SUPABASE_URL =https://wlipykzhlysdkwtqfcbl.supabase.co;
+const SUPABASE_ANON_KEY =sb_publishable_j4y_edxMfOj8Is31ZnmPnw_HmqiY9uc;  // Replace with your key
 
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
