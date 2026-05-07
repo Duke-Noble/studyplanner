@@ -27,7 +27,6 @@
             --gold: #e8b86d;
             --teal: #7ec8c8;
             --coral: #f08080;
-            --mint: #a8d8b9;
             --nav-height: 68px;
             --header-height: 56px;
         }
@@ -136,8 +135,12 @@
             min-height: 1.2em;
             text-align: center;
             font-weight: 500;
+            white-space: pre-line;
         }
-        /* App Shell hidden by default */
+        .login-error.success {
+            color: #2e7d32;
+        }
+        /* hidden by default */
         #app-shell {
             display: none;
             flex-direction: column;
@@ -161,7 +164,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
         }
         .app-header .brand {
             font-weight: 700;
@@ -173,11 +176,6 @@
         }
         .app-header .brand span {
             font-size: 1.4rem;
-        }
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
         }
         .header-actions .badge-reg {
             font-size: 0.7rem;
@@ -199,8 +197,14 @@
             display: block;
         }
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(8px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         .bottom-nav {
             position: fixed;
@@ -212,7 +216,7 @@
             border-top: 1px solid var(--border);
             display: flex;
             height: var(--nav-height);
-            box-shadow: 0 -2px 12px rgba(0,0,0,0.05);
+            box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.05);
         }
         .bottom-nav button {
             flex: 1;
@@ -328,12 +332,16 @@
             color: #5c6bc0;
             border-color: #c5cae9;
         }
-        .list-card .item-actions .btn-edit:hover { background: #e8eaf6; }
+        .list-card .item-actions .btn-edit:hover {
+            background: #e8eaf6;
+        }
         .list-card .item-actions .btn-delete {
             color: #d32f2f;
             border-color: #ef9a9a;
         }
-        .list-card .item-actions .btn-delete:hover { background: #ffebee; }
+        .list-card .item-actions .btn-delete:hover {
+            background: #ffebee;
+        }
         .badge {
             display: inline-block;
             padding: 0.2rem 0.55rem;
@@ -342,9 +350,14 @@
             font-weight: 600;
             white-space: nowrap;
         }
-        .badge-overdue { background: #ffebee; color: #c62828; }
-        .badge-upcoming { background: #fff3e0; color: #e65100; }
-        .badge-done { background: #e8f5e9; color: #2e7d32; }
+        .badge-overdue {
+            background: #ffebee;
+            color: #c62828;
+        }
+        .badge-upcoming {
+            background: #fff3e0;
+            color: #e65100;
+        }
         .btn {
             display: inline-flex;
             align-items: center;
@@ -357,21 +370,39 @@
             transition: var(--transition);
             border: none;
         }
-        .btn-primary { background: var(--rose); color: #fff; }
-        .btn-primary:hover { background: var(--rose-dark); }
-        .btn-outline { background: transparent; border: 2px solid var(--rose); color: var(--rose); }
-        .btn-sm { padding: 0.4rem 0.7rem; font-size: 0.75rem; border-radius: 6px; }
-        .btn-block { width: 100%; justify-content: center; }
+        .btn-primary {
+            background: var(--rose);
+            color: #fff;
+        }
+        .btn-primary:hover {
+            background: var(--rose-dark);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--rose);
+            color: var(--rose);
+        }
+        .btn-sm {
+            padding: 0.4rem 0.7rem;
+            font-size: 0.75rem;
+            border-radius: 6px;
+        }
+        .btn-block {
+            width: 100%;
+            justify-content: center;
+        }
         .modal-overlay {
             display: none;
             position: fixed;
             inset: 0;
             z-index: 200;
-            background: rgba(0,0,0,0.4);
+            background: rgba(0, 0, 0, 0.4);
             align-items: flex-end;
             justify-content: center;
         }
-        .modal-overlay.active { display: flex; }
+        .modal-overlay.active {
+            display: flex;
+        }
         .modal-sheet {
             background: var(--white);
             width: 100%;
@@ -380,12 +411,16 @@
             border-radius: 20px 20px 0 0;
             padding: 1.5rem 1.2rem 2rem;
             overflow-y: auto;
-            box-shadow: 0 -8px 32px rgba(0,0,0,0.15);
+            box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.15);
             animation: slideUp 0.3s ease;
         }
         @keyframes slideUp {
-            from { transform: translateY(100%); }
-            to { transform: translateY(0); }
+            from {
+                transform: translateY(100%);
+            }
+            to {
+                transform: translateY(0);
+            }
         }
         .modal-sheet h3 {
             font-size: 1.1rem;
@@ -393,7 +428,9 @@
             color: var(--rose-dark);
             text-align: center;
         }
-        .modal-sheet .form-group { margin-bottom: 0.9rem; }
+        .modal-sheet .form-group {
+            margin-bottom: 0.9rem;
+        }
         .modal-sheet label {
             display: block;
             font-weight: 600;
@@ -420,9 +457,11 @@
         .modal-sheet select:focus,
         .modal-sheet textarea:focus {
             border-color: var(--rose);
-            box-shadow: 0 0 0 3px rgba(231,84,128,0.06);
+            box-shadow: 0 0 0 3px rgba(231, 84, 128, 0.06);
         }
-        .modal-sheet textarea { min-height: 80px; }
+        .modal-sheet textarea {
+            min-height: 80px;
+        }
         .modal-actions {
             display: flex;
             gap: 0.6rem;
@@ -480,8 +519,12 @@
             color: var(--rose-dark);
             font-size: 0.65rem;
         }
-        .timetable-wrap td:hover { background: #f8e8ee; }
-        .timetable-wrap td.has-slot:hover { background: #f8c8d8; }
+        .timetable-wrap td:hover {
+            background: #f8e8ee;
+        }
+        .timetable-wrap td.has-slot:hover {
+            background: #f8c8d8;
+        }
         .slot-tag {
             display: block;
             font-size: 0.6rem;
@@ -506,7 +549,9 @@
             font-size: 0.85rem;
             transition: var(--transition);
         }
-        .calendar-nav button:hover { background: var(--rose-light); }
+        .calendar-nav button:hover {
+            background: var(--rose-light);
+        }
         .calendar-nav .month-label {
             font-weight: 700;
             font-size: 1rem;
@@ -545,8 +590,13 @@
             min-height: 38px;
             font-weight: 500;
         }
-        .calendar-grid .cal-day:hover { background: #fdf2f5; }
-        .calendar-grid .cal-day.other-month { color: #ccc; cursor: default; }
+        .calendar-grid .cal-day:hover {
+            background: #fdf2f5;
+        }
+        .calendar-grid .cal-day.other-month {
+            color: #ccc;
+            cursor: default;
+        }
         .calendar-grid .cal-day.today {
             background: var(--rose-light);
             font-weight: 700;
@@ -590,10 +640,18 @@
             border-radius: 50%;
             flex-shrink: 0;
         }
-        .ev-dot.assignment { background: var(--rose); }
-        .ev-dot.assessment { background: var(--coral); }
-        .ev-dot.quiz { background: var(--teal); }
-        .ev-dot.deadline { background: var(--gold); }
+        .ev-dot.assignment {
+            background: var(--rose);
+        }
+        .ev-dot.assessment {
+            background: var(--coral);
+        }
+        .ev-dot.quiz {
+            background: var(--teal);
+        }
+        .ev-dot.deadline {
+            background: var(--gold);
+        }
         .profile-card {
             background: var(--white);
             border-radius: var(--radius);
@@ -603,9 +661,19 @@
             max-width: 400px;
             margin: 0 auto;
         }
-        .profile-avatar { font-size: 4rem; margin-bottom: 0.5rem; }
-        .profile-card h2 { color: var(--rose-dark); font-size: 1.3rem; }
-        .profile-card .reg { color: var(--text-light); font-size: 0.85rem; margin-bottom: 1.5rem; }
+        .profile-avatar {
+            font-size: 4rem;
+            margin-bottom: 0.5rem;
+        }
+        .profile-card h2 {
+            color: var(--rose-dark);
+            font-size: 1.3rem;
+        }
+        .profile-card .reg {
+            color: var(--text-light);
+            font-size: 0.85rem;
+            margin-bottom: 1.5rem;
+        }
         .toast {
             position: fixed;
             bottom: 90px;
@@ -623,9 +691,16 @@
             pointer-events: none;
             white-space: nowrap;
         }
-        .toast.show { opacity: 1; pointer-events: auto; }
-        .toast.success { background: #2e7d32; }
-        .toast.error { background: #c62828; }
+        .toast.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .toast.success {
+            background: #2e7d32;
+        }
+        .toast.error {
+            background: #c62828;
+        }
         .sub-tabs {
             display: flex;
             gap: 0.3rem;
@@ -654,24 +729,55 @@
             border-color: var(--rose);
         }
         @media (min-width: 768px) {
-            .stats-grid { grid-template-columns: repeat(4, 1fr); }
-            .modal-sheet { border-radius: 20px; margin: auto; max-height: 80vh; }
-            .modal-overlay { align-items: center; }
-            .page { max-width: 900px; margin: 0 auto; padding: 2rem; }
-            .bottom-nav { max-width: 500px; left: 50%; transform: translateX(-50%); border-radius: 20px 20px 0 0; }
-            .timetable-wrap table { min-width: 700px; }
+            .stats-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            .modal-sheet {
+                border-radius: 20px;
+                margin: auto;
+                max-height: 80vh;
+            }
+            .modal-overlay {
+                align-items: center;
+            }
+            .page {
+                max-width: 900px;
+                margin: 0 auto;
+                padding: 2rem;
+            }
+            .bottom-nav {
+                max-width: 500px;
+                left: 50%;
+                transform: translateX(-50%);
+                border-radius: 20px 20px 0 0;
+            }
+            .timetable-wrap table {
+                min-width: 700px;
+            }
         }
         @media (max-width: 380px) {
-            .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
-            .stat-card { padding: 0.7rem; }
-            .stat-card .stat-num { font-size: 1.5rem; }
-            .bottom-nav button { font-size: 0.6rem; }
-            .bottom-nav button .nav-icon { font-size: 1.2rem; }
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.5rem;
+            }
+            .stat-card {
+                padding: 0.7rem;
+            }
+            .stat-card .stat-num {
+                font-size: 1.5rem;
+            }
+            .bottom-nav button {
+                font-size: 0.6rem;
+            }
+            .bottom-nav button .nav-icon {
+                font-size: 1.2rem;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- LOGIN SCREEN -->
+
+    <!-- ═══════════ LOGIN SCREEN ═══════════ -->
     <div id="login-screen">
         <div class="login-card">
             <div class="logo">📚</div>
@@ -679,12 +785,12 @@
             <p class="subtitle">Vida Arthur · Personal Planner</p>
             <label for="reg-input">Registration Number</label>
             <input type="text" id="reg-input" placeholder="EH/GOV/25/0128" autocomplete="off" maxlength="20">
-            <div class="login-error" id="login-error">Initialising…</div>
+            <div class="login-error" id="login-error"></div>
             <button class="btn-login" id="btn-login">Sign In</button>
         </div>
     </div>
 
-    <!-- APP (hidden until login) -->
+    <!-- ═══════════ APP SHELL (hidden until login) ═══════════ -->
     <div id="app-shell">
         <header class="app-header">
             <div class="brand"><span>📚</span> StudyDesk</div>
@@ -701,9 +807,9 @@
                 <div class="stat-card"><div class="stat-num" id="stat-deadlines">0</div><div class="stat-label">Deadlines</div></div>
             </div>
             <div class="section-title">🔴 Overdue Tasks</div>
-            <div id="overdue-list"><p style="color:var(--text-light);font-size:0.85rem;">Loading…</p></div>
+            <div id="overdue-list"><p style="color:var(--text-light);font-size:0.85rem;">Loading...</p></div>
             <div class="section-title" style="margin-top:1rem;">📅 Upcoming (next 7 days)</div>
-            <div id="upcoming-list"><p style="color:var(--text-light);font-size:0.85rem;">Loading…</p></div>
+            <div id="upcoming-list"><p style="color:var(--text-light);font-size:0.85rem;">Loading...</p></div>
         </div>
 
         <div class="page" id="page-tasks">
@@ -759,644 +865,871 @@
     </div>
     <div class="toast" id="toast"></div>
 
+    <!-- ═══════════ SCRIPTS (end of body – all DOM exists) ═══════════ -->
     <script>
-        (function() {
-            // ═══════════════════════════════════════
-            // CONFIGURATION – replace with your real Supabase keys
-            // ═══════════════════════════════════════
-            const SUPABASE_URL =https://wlipykzhlysdkwtqfcbl.supabase.co;
-            const SUPABASE_ANON_KEY =sb_publishable_j4y_edxMfOj8Is31ZnmPnw_HmqiY9uc;
-            const HARDCODED_EMAIL = 'vida@studydesk.local';
-            const HARDCODED_PASSWORD = 'StudyPlanner2025!';
-            const HARDCODED_REG = 'EH/GOV/25/0128';
-            const COURSES = ['ASP116A', 'CMS108', 'EGS102', 'EGS104', 'EGS106', 'EPS101A', 'HIS104', 'ITS101'];
+        // ────────────────────────────────────────────────
+        // CONFIGURATION – YOU MUST REPLACE THESE TWO VALUES
+        // ────────────────────────────────────────────────
+        var SUPABASE_URL =https://wlipykzhlysdkwtqfcbl.supabase.co;
+        var SUPABASE_ANON_KEY =sb_publishable_j4y_edxMfOj8Is31ZnmPnw_HmqiY9uc;
+        var HARDCODED_EMAIL = 'vida@studydesk.local';
+        var HARDCODED_PASSWORD = 'StudyPlanner2025!';
+        var HARDCODED_REG = 'EH/GOV/25/0128';
+        var COURSES = ['ASP116A', 'CMS108', 'EGS102', 'EGS104', 'EGS106', 'EPS101A', 'HIS104', 'ITS101'];
 
-            // Globals
-            let supabase;
-            let currentUser = null;
-            let currentSubTab = 'assignments';
-            let calendarDate = new Date();
-            let selectedCalendarDay = null;
-            let timetableSlots = [];
-            let editingSlotId = null;
-            let editingItemId = null;
+        // ────────────────────────────────────────────────
+        // GLOBALS
+        // ────────────────────────────────────────────────
+        var supabase = null;
+        var currentUser = null;
+        var currentSubTab = 'assignments';
+        var calendarDate = new Date();
+        var selectedCalendarDay = null;
+        var timetableSlots = [];
+        var editingSlotId = null;
+        var editingItemId = null;
 
-            // DOM refs
-            const $loginScreen = document.getElementById('login-screen');
-            const $appShell = document.getElementById('app-shell');
-            const $regInput = document.getElementById('reg-input');
-            const $btnLogin = document.getElementById('btn-login');
-            const $loginError = document.getElementById('login-error');
-            const $headerReg = document.getElementById('header-reg');
-            const $profileReg = document.getElementById('profile-reg');
-            const $toast = document.getElementById('toast');
-            const $modalCrud = document.getElementById('modal-crud');
-            const $modalCrudSheet = document.getElementById('modal-crud-sheet');
-            const $modalSlot = document.getElementById('modal-slot');
-            const $modalSlotSheet = document.getElementById('modal-slot-sheet');
-            const $subTabs = document.getElementById('sub-tabs');
-            const $subTabContent = document.getElementById('sub-tab-content');
-            const $overdueList = document.getElementById('overdue-list');
-            const $upcomingList = document.getElementById('upcoming-list');
-            const $timetableWrap = document.getElementById('timetable-wrap');
-            const $calendarNav = document.getElementById('calendar-nav');
-            const $calendarGrid = document.getElementById('calendar-grid');
-            const $dayEventsPanel = document.getElementById('day-events-panel');
-            const $btnSignout = document.getElementById('btn-signout');
+        // ────────────────────────────────────────────────
+        // DOM REFERENCES (cached after DOM ready)
+        // ────────────────────────────────────────────────
+        var $loginScreen, $appShell, $regInput, $btnLogin, $loginError;
+        var $headerReg, $profileReg, $toast;
+        var $modalCrud, $modalCrudSheet, $modalSlot, $modalSlotSheet;
+        var $subTabs, $subTabContent, $overdueList, $upcomingList;
+        var $timetableWrap, $calendarNav, $calendarGrid, $dayEventsPanel;
+        var $btnSignout;
 
-            // ─────────────────────────────────
-            // Helpers
-            // ─────────────────────────────────
-            function escapeHTML(str) {
-                const div = document.createElement('div');
-                div.textContent = str || '';
-                return div.innerHTML;
+        function cacheDom() {
+            $loginScreen = document.getElementById('login-screen');
+            $appShell = document.getElementById('app-shell');
+            $regInput = document.getElementById('reg-input');
+            $btnLogin = document.getElementById('btn-login');
+            $loginError = document.getElementById('login-error');
+            $headerReg = document.getElementById('header-reg');
+            $profileReg = document.getElementById('profile-reg');
+            $toast = document.getElementById('toast');
+            $modalCrud = document.getElementById('modal-crud');
+            $modalCrudSheet = document.getElementById('modal-crud-sheet');
+            $modalSlot = document.getElementById('modal-slot');
+            $modalSlotSheet = document.getElementById('modal-slot-sheet');
+            $subTabs = document.getElementById('sub-tabs');
+            $subTabContent = document.getElementById('sub-tab-content');
+            $overdueList = document.getElementById('overdue-list');
+            $upcomingList = document.getElementById('upcoming-list');
+            $timetableWrap = document.getElementById('timetable-wrap');
+            $calendarNav = document.getElementById('calendar-nav');
+            $calendarGrid = document.getElementById('calendar-grid');
+            $dayEventsPanel = document.getElementById('day-events-panel');
+            $btnSignout = document.getElementById('btn-signout');
+        }
+
+        // ────────────────────────────────────────────────
+        // VISIBLE ERROR DISPLAY (replaces console.error)
+        // ────────────────────────────────────────────────
+        function showError(msg) {
+            if ($loginError) {
+                $loginError.textContent = msg;
+                $loginError.className = 'login-error';
             }
+            // Also log to console for debugging
+            console.error(msg);
+        }
 
-            function showToast(msg, type = '') {
-                $toast.textContent = msg;
-                $toast.className = 'toast ' + type + ' show';
-                clearTimeout($toast._timeout);
-                $toast._timeout = setTimeout(() => { $toast.className = 'toast'; }, 2500);
+        function showSuccess(msg) {
+            if ($loginError) {
+                $loginError.textContent = msg;
+                $loginError.className = 'login-error success';
             }
+        }
 
-            // ─────────────────────────────────
-            // Critical error display (login card)
-            // ─────────────────────────────────
-            function displayLoginError(msg) {
-                if ($loginError) $loginError.textContent = msg;
-                console.error(msg);
+        function escapeHTML(str) {
+            var div = document.createElement('div');
+            div.textContent = str || '';
+            return div.innerHTML;
+        }
+
+        function showToast(msg, type) {
+            if (!$toast) return;
+            $toast.textContent = msg;
+            $toast.className = 'toast ' + (type || '') + ' show';
+            clearTimeout($toast._timeout);
+            $toast._timeout = setTimeout(function() { $toast.className = 'toast'; }, 2500);
+        }
+
+        // ────────────────────────────────────────────────
+        // SUPABASE INIT
+        // ────────────────────────────────────────────────
+        function initSupabase() {
+            if (supabase) return supabase;
+            if (typeof window.supabase === 'undefined') {
+                throw new Error('Supabase library not loaded. Check your internet connection.');
             }
+            supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+            return supabase;
+        }
 
-            // ─────────────────────────────────
-            // Supabase init
-            // ─────────────────────────────────
-            function initSupabase() {
-                if (supabase) return supabase;
-                if (typeof window.supabase === 'undefined') {
-                    throw new Error('Supabase library not loaded. Check your internet connection or CDN.');
-                }
-                supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-                return supabase;
-            }
+        function isPlaceholderCredentials() {
+            return SUPABASE_URL.indexOf('your-project-id') !== -1 ||
+                SUPABASE_ANON_KEY.indexOf('your-anon-key') !== -1;
+        }
 
-            // ─────────────────────────────────
-            // AUTH
-            // ─────────────────────────────────
-            async function checkSession() {
-                try {
-                    initSupabase();
-                    const { data } = await supabase.auth.getSession();
-                    if (data && data.session) {
-                        currentUser = data.session.user;
-                        showApp();
-                        await refreshAllData();
-                        displayLoginError(''); // clear any previous errors
-                        return true;
-                    }
-                } catch (e) {
-                    console.warn('Session check error:', e.message);
-                    // not fatal – stay on login screen
-                }
-                return false;
-            }
+        // ────────────────────────────────────────────────
+        // AUTH
+        // ────────────────────────────────────────────────
+        function showApp() {
+            $loginScreen.classList.add('hidden');
+            $appShell.classList.add('active');
+            if ($headerReg) $headerReg.textContent = HARDCODED_REG;
+            if ($profileReg) $profileReg.textContent = HARDCODED_REG;
+            navigateTo('dashboard');
+        }
 
-            async function doLogin() {
-                const reg = $regInput.value.trim();
-                if (reg !== HARDCODED_REG) {
-                    displayLoginError('Invalid registration number. Only ' + HARDCODED_REG + ' can log in.');
-                    return;
-                }
-                displayLoginError('');
+        function hideApp() {
+            $loginScreen.classList.remove('hidden');
+            $appShell.classList.remove('active');
+            if ($regInput) $regInput.value = '';
+            if ($loginError) { $loginError.textContent = '';
+                $loginError.className = 'login-error'; }
+        }
+
+        async function doLogin() {
+            // IMMEDIATE visual feedback – proves the button works
+            if ($btnLogin) {
+                $btnLogin.textContent = 'Checking...';
                 $btnLogin.disabled = true;
-                $btnLogin.textContent = 'Signing in…';
-                try {
-                    initSupabase();
-                    // Try sign-in first
-                    let { data, error } = await supabase.auth.signInWithPassword({
-                        email: HARDCODED_EMAIL,
-                        password: HARDCODED_PASSWORD,
-                    });
-                    // If user does not exist, create account
-                    if (error && error.message && error.message.includes('Invalid login credentials')) {
-                        const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
+            }
+            if ($loginError) { $loginError.textContent = '';
+                $loginError.className = 'login-error'; }
+
+            var reg = $regInput ? $regInput.value.trim() : '';
+            if (reg !== HARDCODED_REG) {
+                showError('Invalid registration number. Only ' + HARDCODED_REG + ' can log in.');
+                if ($btnLogin) { $btnLogin.disabled = false;
+                    $btnLogin.textContent = 'Sign In'; }
+                return;
+            }
+
+            // Check placeholder credentials
+            if (isPlaceholderCredentials()) {
+                showError('⚠️ You must replace SUPABASE_URL and SUPABASE_ANON_KEY\nin the <script> with your actual Supabase project credentials.');
+                if ($btnLogin) { $btnLogin.disabled = false;
+                    $btnLogin.textContent = 'Sign In'; }
+                return;
+            }
+
+            try {
+                initSupabase();
+
+                // Try sign-in
+                var result = await supabase.auth.signInWithPassword({
+                    email: HARDCODED_EMAIL,
+                    password: HARDCODED_PASSWORD,
+                });
+
+                if (result.error) {
+                    // If user doesn't exist, try to sign up
+                    if (result.error.message && result.error.message.indexOf('Invalid login credentials') !== -1) {
+                        var signUpResult = await supabase.auth.signUp({
                             email: HARDCODED_EMAIL,
                             password: HARDCODED_PASSWORD,
                         });
-                        if (signUpError) throw signUpError;
-                        // After sign-up, attempt sign-in again (some configurations auto-sign-in)
-                        const { data: data2, error: error2 } = await supabase.auth.signInWithPassword({
+                        if (signUpResult.error) throw signUpResult.error;
+                        // Sign in after creation
+                        var signInResult = await supabase.auth.signInWithPassword({
                             email: HARDCODED_EMAIL,
                             password: HARDCODED_PASSWORD,
                         });
-                        if (error2) throw error2;
-                        data = data2;
-                    } else if (error) {
-                        throw error;
+                        if (signInResult.error) throw signInResult.error;
+                        result = signInResult;
+                    } else {
+                        throw result.error;
                     }
-                    currentUser = data.user;
-                    showApp();
-                    await refreshAllData();
-                    showToast('Welcome, Vida! 🎉', 'success');
-                } catch (e) {
-                    console.error('Login error:', e);
-                    displayLoginError('Login failed: ' + (e.message || 'Unknown error'));
-                } finally {
-                    $btnLogin.disabled = false;
-                    $btnLogin.textContent = 'Sign In';
+                }
+
+                currentUser = result.data.user;
+                showApp();
+                await refreshAllData();
+                showToast('Welcome, Vida! 🎉', 'success');
+            } catch (e) {
+                showError('Login failed: ' + (e.message || 'Unknown error'));
+            } finally {
+                if ($btnLogin) { $btnLogin.disabled = false;
+                    $btnLogin.textContent = 'Sign In'; }
+            }
+        }
+
+        async function doSignOut() {
+            try { if (supabase) await supabase.auth.signOut(); } catch (e) {}
+            currentUser = null;
+            hideApp();
+            showToast('Signed out.', '');
+        }
+
+        // ────────────────────────────────────────────────
+        // NAVIGATION
+        // ────────────────────────────────────────────────
+        function navigateTo(pageName) {
+            var pages = document.querySelectorAll('.page');
+            for (var i = 0; i < pages.length; i++) {
+                pages[i].classList.remove('active');
+            }
+            var pageEl = document.getElementById('page-' + pageName);
+            if (pageEl) pageEl.classList.add('active');
+            var navButtons = document.querySelectorAll('.bottom-nav button');
+            for (var j = 0; j < navButtons.length; j++) {
+                navButtons[j].classList.toggle('active', navButtons[j].dataset.page === pageName);
+            }
+            if (pageName === 'timetable') renderTimetable();
+            if (pageName === 'calendar') renderCalendar();
+            if (pageName === 'dashboard') refreshDashboardStats();
+            if (pageName === 'tasks') renderSubTabContent();
+        }
+
+        // ────────────────────────────────────────────────
+        // SUB-TABS
+        // ────────────────────────────────────────────────
+        function setSubTab(tabName) {
+            currentSubTab = tabName;
+            var buttons = $subTabs.querySelectorAll('button');
+            for (var i = 0; i < buttons.length; i++) {
+                buttons[i].classList.toggle('active', buttons[i].dataset.tab === tabName);
+            }
+            renderSubTabContent();
+        }
+
+        async function renderSubTabContent() {
+            if (!currentUser) return;
+            if (currentSubTab === 'courses') {
+                $subTabContent.innerHTML = renderCoursesList();
+            } else {
+                $subTabContent.innerHTML = await renderCrudList(currentSubTab);
+                attachCrudListEvents(currentSubTab);
+            }
+        }
+
+        function renderCoursesList() {
+            var html =
+                '<div class="section-title">📖 My Courses</div><p style="font-size:0.8rem;color:var(--text-light);margin-bottom:0.8rem;">Registered courses.</p>';
+            for (var i = 0; i < COURSES.length; i++) {
+                html +=
+                    '<div class="list-card"><div class="item-info"><div class="item-title">' + COURSES[i] +
+                    '</div></div></div>';
+            }
+            return html;
+        }
+
+        // ────────────────────────────────────────────────
+        // CRUD HELPERS
+        // ────────────────────────────────────────────────
+        function getTableName(type) {
+            var map = { assignments: 'assignments', assessments: 'assessments', quizzes: 'quizzes', deadlines: 'deadlines',
+                notes: 'notes' };
+            return map[type] || type;
+        }
+
+        function getDateField(type) {
+            var map = { assignments: 'due_date', assessments: 'exam_date', quizzes: 'quiz_date', deadlines: 'deadline_date',
+                notes: null };
+            return map[type] || null;
+        }
+
+        async function fetchItems(type) {
+            var table = getTableName(type);
+            var dateField = getDateField(type);
+            var query = supabase.from(table).select('*').eq('user_id', currentUser.id);
+            if (dateField) {
+                query = query.order(dateField, { ascending: true });
+            } else {
+                query = query.order('created_at', { ascending: false });
+            }
+            var result = await query;
+            if (result.error) { console.error('Fetch error:', result.error); return []; }
+            return result.data || [];
+        }
+
+        async function renderCrudList(type) {
+            var items = await fetchItems(type);
+            var titles = { assignments: '📝 Assignments', assessments: '📋 Assessments', quizzes: '❓ Quizzes',
+                deadlines: '⏰ Deadlines', notes: '📒 Notes' };
+            var html =
+                '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.8rem;">' +
+                '<div class="section-title" style="margin:0;">' + (titles[type] || type) + '</div>' +
+                '<button class="btn btn-primary btn-sm btn-add-item" data-type="' + type + '">+ Add</button>' +
+                '</div>';
+            if (items.length === 0) {
+                html += '<p style="color:var(--text-light);font-size:0.85rem;">No ' + type +
+                    ' yet. Tap "+ Add".</p>';
+            } else {
+                for (var i = 0; i < items.length; i++) {
+                    var item = items[i];
+                    var dateField = getDateField(type);
+                    var dateVal = dateField ? (item[dateField] || '') : '';
+                    var dateDisplay = dateVal ? new Date(dateVal).toLocaleDateString('en-GB', { day: 'numeric',
+                        month: 'short', year: 'numeric' }) : '';
+                    var isOverdue = dateVal && new Date(dateVal) < new Date() && type !== 'notes';
+                    var courseBadge = item.course ? '<span style="font-size:0.7rem;color:var(--rose);font-weight:600;">' +
+                        item.course + '</span>' : '';
+                    var preview = '';
+                    if (type === 'notes') {
+                        preview = (item.content || '').substring(0, 80) + '...';
+                    } else if (item.description) {
+                        preview = item.description.substring(0, 60) + (item.description.length > 60 ? '...' : '');
+                    }
+                    html += '<div class="list-card" data-id="' + item.id + '">' +
+                        '<div class="item-info">' +
+                        '<div class="item-title">' + escapeHTML(item.title || 'Untitled') + ' ' + courseBadge +
+                        '</div>' +
+                        '<div class="item-meta">' + dateDisplay + ' ' + (isOverdue ?
+                            '<span class="badge badge-overdue">Overdue</span>' : '') + '</div>' +
+                        (preview ? '<div class="item-meta" style="font-style:italic;">' + escapeHTML(preview) +
+                            '</div>' : '') +
+                        '</div>' +
+                        '<div class="item-actions">' +
+                        '<button class="btn-edit" data-id="' + item.id + '" data-type="' + type +
+                        '">✏️</button>' +
+                        '<button class="btn-delete" data-id="' + item.id + '" data-type="' + type +
+                        '">🗑</button>' +
+                        '</div>' +
+                        '</div>';
                 }
             }
+            return html;
+        }
 
-            async function doSignOut() {
-                try { await supabase.auth.signOut(); } catch (e) { /* ignore */ }
-                currentUser = null;
-                hideApp();
-                $regInput.value = '';
-                displayLoginError('');
+        function attachCrudListEvents(type) {
+            var addBtn = $subTabContent.querySelector('.btn-add-item');
+            if (addBtn) {
+                addBtn.onclick = function() { openCrudModal(type, null); };
             }
-
-            function showApp() {
-                $loginScreen.classList.add('hidden');
-                $appShell.classList.add('active');
-                $headerReg.textContent = HARDCODED_REG;
-                $profileReg.textContent = HARDCODED_REG;
-                navigateTo('dashboard');
+            var editBtns = $subTabContent.querySelectorAll('.btn-edit');
+            for (var i = 0; i < editBtns.length; i++) {
+                editBtns[i].onclick = (function(btn) {
+                    return async function() {
+                        var id = btn.dataset.id;
+                        var items = await fetchItems(type);
+                        for (var j = 0; j < items.length; j++) {
+                            if (items[j].id == id) { openCrudModal(type, items[j]); break; }
+                        }
+                    };
+                })(editBtns[i]);
             }
-
-            function hideApp() {
-                $loginScreen.classList.remove('hidden');
-                $appShell.classList.remove('active');
-            }
-
-            // ─────────────────────────────────
-            // NAVIGATION
-            // ─────────────────────────────────
-            function navigateTo(pageName) {
-                document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-                const pageEl = document.getElementById('page-' + pageName);
-                if (pageEl) pageEl.classList.add('active');
-                document.querySelectorAll('.bottom-nav button').forEach(b => {
-                    b.classList.toggle('active', b.dataset.page === pageName);
-                });
-                if (pageName === 'timetable') renderTimetable();
-                if (pageName === 'calendar') renderCalendar();
-                if (pageName === 'dashboard') refreshDashboardStats();
-                if (pageName === 'tasks') renderSubTabContent();
-            }
-
-            // ─────────────────────────────────
-            // SUB-TABS
-            // ─────────────────────────────────
-            function setSubTab(tabName) {
-                currentSubTab = tabName;
-                document.querySelectorAll('#sub-tabs button').forEach(b => {
-                    b.classList.toggle('active', b.dataset.tab === tabName);
-                });
-                renderSubTabContent();
-            }
-
-            async function renderSubTabContent() {
-                if (!currentUser) return;
-                if (currentSubTab === 'courses') {
-                    $subTabContent.innerHTML = renderCoursesList();
-                } else {
-                    $subTabContent.innerHTML = await renderCrudList(currentSubTab);
-                    attachCrudListEvents(currentSubTab);
-                }
-            }
-
-            function renderCoursesList() {
-                let html = '<div class="section-title">📖 My Courses</div><p style="font-size:0.8rem;color:var(--text-light);margin-bottom:0.8rem;">Registered courses.</p>';
-                COURSES.forEach(c => {
-                    html += `<div class="list-card"><div class="item-info"><div class="item-title">${c}</div></div></div>`;
-                });
-                return html;
-            }
-
-            // ─────────────────────────────────
-            // CRUD (assignments, assessments, quizzes, deadlines, notes)
-            // ─────────────────────────────────
-            function getTableName(type) {
-                const map = { assignments: 'assignments', assessments: 'assessments', quizzes: 'quizzes', deadlines: 'deadlines', notes: 'notes' };
-                return map[type] || type;
-            }
-            function getDateField(type) {
-                const map = { assignments: 'due_date', assessments: 'exam_date', quizzes: 'quiz_date', deadlines: 'deadline_date', notes: null };
-                return map[type] || null;
-            }
-
-            async function fetchItems(type) {
-                const table = getTableName(type);
-                const dateField = getDateField(type);
-                let query = supabase.from(table).select('*').eq('user_id', currentUser.id);
-                if (dateField) {
-                    query = query.order(dateField, { ascending: true });
-                } else {
-                    query = query.order('created_at', { ascending: false });
-                }
-                const { data, error } = await query;
-                if (error) { console.error('Fetch error:', error); return []; }
-                return data || [];
-            }
-
-            async function renderCrudList(type) {
-                const items = await fetchItems(type);
-                const titles = { assignments: '📝 Assignments', assessments: '📋 Assessments', quizzes: '❓ Quizzes', deadlines: '⏰ Deadlines', notes: '📒 Notes' };
-                let html = `<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.8rem;">
-                    <div class="section-title" style="margin:0;">${titles[type] || type}</div>
-                    <button class="btn btn-primary btn-sm btn-add-item" data-type="${type}">+ Add</button>
-                </div>`;
-                if (items.length === 0) {
-                    html += `<p style="color:var(--text-light);font-size:0.85rem;">No ${type} yet. Tap "+ Add".</p>`;
-                } else {
-                    items.forEach(item => {
-                        const dateField = getDateField(type);
-                        const dateVal = dateField ? (item[dateField] || '') : '';
-                        const dateDisplay = dateVal ? new Date(dateVal).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) : '';
-                        const isOverdue = dateVal && new Date(dateVal) < new Date() && type !== 'notes';
-                        const courseBadge = item.course ? `<span style="font-size:0.7rem;color:var(--rose);font-weight:600;">${item.course}</span>` : '';
-                        const preview = type === 'notes' ? (item.content || '').substring(0, 80) + '...' : (item.description || '').substring(0, 60) + (item.description && item.description.length > 60 ? '...' : '');
-                        html += `<div class="list-card" data-id="${item.id}">
-                            <div class="item-info">
-                                <div class="item-title">${escapeHTML(item.title||'Untitled')} ${courseBadge}</div>
-                                <div class="item-meta">${dateDisplay} ${isOverdue ? '<span class="badge badge-overdue">Overdue</span>' : ''}</div>
-                                ${preview ? `<div class="item-meta" style="font-style:italic;">${escapeHTML(preview)}</div>` : ''}
-                            </div>
-                            <div class="item-actions">
-                                <button class="btn-edit" data-id="${item.id}" data-type="${type}">✏️</button>
-                                <button class="btn-delete" data-id="${item.id}" data-type="${type}">🗑</button>
-                            </div>
-                        </div>`;
-                    });
-                }
-                return html;
-            }
-
-            function attachCrudListEvents(type) {
-                const addBtn = $subTabContent.querySelector('.btn-add-item');
-                if (addBtn) {
-                    addBtn.addEventListener('click', () => openCrudModal(type, null));
-                }
-                $subTabContent.querySelectorAll('.btn-edit').forEach(btn => {
-                    btn.addEventListener('click', async () => {
-                        const id = btn.dataset.id;
-                        const items = await fetchItems(type);
-                        const item = items.find(i => i.id == id);
-                        if (item) openCrudModal(type, item);
-                    });
-                });
-                $subTabContent.querySelectorAll('.btn-delete').forEach(btn => {
-                    btn.addEventListener('click', async () => {
-                        const id = btn.dataset.id;
+            var delBtns = $subTabContent.querySelectorAll('.btn-delete');
+            for (var k = 0; k < delBtns.length; k++) {
+                delBtns[k].onclick = (function(btn) {
+                    return async function() {
+                        var id = btn.dataset.id;
                         if (confirm('Delete this item?')) {
                             await deleteItem(type, id);
                             renderSubTabContent();
                             showToast('Deleted!', 'success');
                         }
-                    });
-                });
+                    };
+                })(delBtns[k]);
             }
+        }
 
-            async function deleteItem(type, id) {
-                const table = getTableName(type);
-                const { error } = await supabase.from(table).delete().eq('id', id).eq('user_id', currentUser.id);
-                if (error) { showToast('Delete failed: ' + error.message, 'error'); throw error; }
+        async function deleteItem(type, id) {
+            var table = getTableName(type);
+            var result = await supabase.from(table).delete().eq('id', id).eq('user_id', currentUser.id);
+            if (result.error) { showToast('Delete failed: ' + result.error.message, 'error'); throw result.error; }
+        }
+
+        function openCrudModal(type, item) {
+            editingItemId = item ? item.id : null;
+            var isNote = type === 'notes';
+            var dateField = getDateField(type);
+            var dateLabel = type === 'assessments' ? 'Exam Date' : type === 'deadlines' ? 'Deadline Date' : type ===
+                'quizzes' ? 'Quiz Date' : 'Due Date';
+            var title = item ? 'Edit ' + type.slice(0, -1) : 'Add ' + type.slice(0, -1);
+            var courseOptions = '';
+            for (var i = 0; i < COURSES.length; i++) {
+                courseOptions += '<option value="' + COURSES[i] + '"' + (item && item.course === COURSES[i] ? ' selected' :
+                    '') + '>' + COURSES[i] + '</option>';
             }
+            courseOptions += '<option value=""' + (!item || !item.course ? ' selected' : '') + '>None</option>';
 
-            function openCrudModal(type, item) {
-                editingItemId = item ? item.id : null;
-                const isNote = type === 'notes';
-                const dateField = getDateField(type);
-                const dateLabel = type === 'assessments' ? 'Exam Date' : type === 'deadlines' ? 'Deadline Date' : type === 'quizzes' ? 'Quiz Date' : 'Due Date';
-                const title = item ? 'Edit ' + type.slice(0, -1) : 'Add ' + type.slice(0, -1);
-                $modalCrudSheet.innerHTML = `
-                    <h3>${title}</h3>
-                    <div class="form-group"><label>Title</label><input id="crud-title" value="${escapeHTML(item?item.title||'')}"></div>
-                    ${!isNote ? `<div class="form-group"><label>Description</label><textarea id="crud-desc">${escapeHTML(item?item.description||'')}</textarea></div>` : ''}
-                    <div class="form-group"><label>Course</label><select id="crud-course">${COURSES.map(c=>`<option value="${c}" ${item&&item.course===c?'selected':''}>${c}</option>`).join('')}<option value="" ${!item||!item.course?'selected':''}>None</option></select></div>
-                    ${dateField ? `<div class="form-group"><label>${dateLabel}</label><input type="date" id="crud-date" value="${item&&item[dateField]?item[dateField].split('T')[0]:''}"></div>` : ''}
-                    ${isNote ? `<div class="form-group"><label>Content</label><textarea id="crud-content" style="min-height:120px;">${escapeHTML(item?item.content||'')}</textarea></div>` : ''}
-                    <div class="modal-actions">
-                        <button class="btn btn-outline btn-sm" id="btn-crud-cancel">Cancel</button>
-                        <button class="btn btn-primary btn-sm" id="btn-crud-save">Save</button>
-                    </div>`;
-                $modalCrud.classList.add('active');
+            var html = '<h3>' + title + '</h3>' +
+                '<div class="form-group"><label>Title</label><input id="crud-title" value="' + escapeHTML(item ? item.title ||
+                    '' : '') + '"></div>' +
+                (!isNote ? '<div class="form-group"><label>Description</label><textarea id="crud-desc">' + escapeHTML(item ?
+                    item.description || '' : '') + '</textarea></div>' : '') +
+                '<div class="form-group"><label>Course</label><select id="crud-course">' + courseOptions + '</select></div>' +
+                (dateField ? '<div class="form-group"><label>' + dateLabel +
+                    '</label><input type="date" id="crud-date" value="' + (item && item[dateField] ? item[dateField].split(
+                        'T')[0] : '') + '"></div>' : '') +
+                (isNote ? '<div class="form-group"><label>Content</label><textarea id="crud-content" style="min-height:120px;">' +
+                    escapeHTML(item ? item.content || '' : '') + '</textarea></div>' : '') +
+                '<div class="modal-actions">' +
+                '<button class="btn btn-outline btn-sm" id="btn-crud-cancel">Cancel</button>' +
+                '<button class="btn btn-primary btn-sm" id="btn-crud-save">Save</button>' +
+                '</div>';
 
-                document.getElementById('btn-crud-cancel').addEventListener('click', () => $modalCrud.classList.remove('active'));
-                document.getElementById('btn-crud-save').addEventListener('click', async () => {
-                    await saveCrudItem(type);
-                });
-                $modalCrud.addEventListener('click', function(e) {
-                    if (e.target === $modalCrud) $modalCrud.classList.remove('active');
-                }, { once: true });
-            }
+            $modalCrudSheet.innerHTML = html;
+            $modalCrud.classList.add('active');
 
-            async function saveCrudItem(type) {
-                const table = getTableName(type);
-                const dateField = getDateField(type);
-                const titleEl = document.getElementById('crud-title');
-                const descEl = document.getElementById('crud-desc');
-                const courseEl = document.getElementById('crud-course');
-                const dateEl = dateField ? document.getElementById('crud-date') : null;
-                const contentEl = type === 'notes' ? document.getElementById('crud-content') : null;
-                const title = titleEl ? titleEl.value.trim() : '';
-                if (!title) { showToast('Title required.', 'error'); return; }
-                const payload = {
-                    user_id: currentUser.id,
-                    title: title,
-                    description: descEl ? descEl.value.trim() : '',
-                    course: courseEl ? courseEl.value : '',
-                };
-                if (dateField && dateEl && dateEl.value) payload[dateField] = dateEl.value + 'T00:00:00';
-                if (type === 'notes' && contentEl) payload.content = contentEl.value.trim();
-                try {
-                    if (editingItemId) {
-                        await supabase.from(table).update(payload).eq('id', editingItemId).eq('user_id', currentUser.id);
-                    } else {
-                        await supabase.from(table).insert(payload);
-                    }
-                    $modalCrud.classList.remove('active');
-                    editingItemId = null;
-                    renderSubTabContent();
-                    if (document.getElementById('page-dashboard').classList.contains('active')) refreshDashboardStats();
-                    showToast('Saved!', 'success');
-                } catch (e) {
-                    showToast('Save failed: ' + e.message, 'error');
+            document.getElementById('btn-crud-cancel').onclick = function() { $modalCrud.classList.remove('active'); };
+            document.getElementById('btn-crud-save').onclick = function() { saveCrudItem(type); };
+            $modalCrud.onclick = function(e) { if (e.target === $modalCrud) $modalCrud.classList.remove('active'); };
+        }
+
+        async function saveCrudItem(type) {
+            var table = getTableName(type);
+            var dateField = getDateField(type);
+            var titleEl = document.getElementById('crud-title');
+            var descEl = document.getElementById('crud-desc');
+            var courseEl = document.getElementById('crud-course');
+            var dateEl = dateField ? document.getElementById('crud-date') : null;
+            var contentEl = type === 'notes' ? document.getElementById('crud-content') : null;
+            var title = titleEl ? titleEl.value.trim() : '';
+            if (!title) { showToast('Title required.', 'error'); return; }
+            var payload = {
+                user_id: currentUser.id,
+                title: title,
+                description: descEl ? descEl.value.trim() : '',
+                course: courseEl ? courseEl.value : '',
+            };
+            if (dateField && dateEl && dateEl.value) payload[dateField] = dateEl.value + 'T00:00:00';
+            if (type === 'notes' && contentEl) payload.content = contentEl.value.trim();
+            try {
+                if (editingItemId) {
+                    await supabase.from(table).update(payload).eq('id', editingItemId).eq('user_id', currentUser.id);
+                } else {
+                    await supabase.from(table).insert(payload);
                 }
+                $modalCrud.classList.remove('active');
+                editingItemId = null;
+                renderSubTabContent();
+                if (document.getElementById('page-dashboard').classList.contains('active')) refreshDashboardStats();
+                showToast('Saved!', 'success');
+            } catch (e) {
+                showToast('Save failed: ' + e.message, 'error');
             }
+        }
 
-            // ─────────────────────────────────
-            // DASHBOARD
-            // ─────────────────────────────────
-            async function refreshDashboardStats() {
-                if (!currentUser) return;
-                const [assignments, assessments, quizzes, deadlines] = await Promise.all([
-                    fetchItems('assignments'), fetchItems('assessments'), fetchItems('quizzes'), fetchItems('deadlines')
+        // ────────────────────────────────────────────────
+        // DASHBOARD
+        // ────────────────────────────────────────────────
+        async function refreshDashboardStats() {
+            if (!currentUser) return;
+            try {
+                var results = await Promise.all([
+                    fetchItems('assignments'),
+                    fetchItems('assessments'),
+                    fetchItems('quizzes'),
+                    fetchItems('deadlines'),
                 ]);
-                document.getElementById('stat-assignments').textContent = assignments.length;
-                document.getElementById('stat-assessments').textContent = assessments.length;
-                document.getElementById('stat-quizzes').textContent = quizzes.length;
-                document.getElementById('stat-deadlines').textContent = deadlines.length;
-                const now = new Date();
-                const allDated = [
-                    ...assignments.map(i => ({ ...i, _type: 'assignment', _date: i.due_date })),
-                    ...assessments.map(i => ({ ...i, _type: 'assessment', _date: i.exam_date })),
-                    ...quizzes.map(i => ({ ...i, _type: 'quiz', _date: i.quiz_date })),
-                    ...deadlines.map(i => ({ ...i, _type: 'deadline', _date: i.deadline_date })),
-                ];
-                const overdue = allDated.filter(i => i._date && new Date(i._date) < now);
-                const upcoming = allDated.filter(i => {
-                    if (!i._date) return false;
-                    const diff = (new Date(i._date) - now) / 86400000;
-                    return diff >= 0 && diff <= 7;
-                }).sort((a, b) => new Date(a._date) - new Date(b._date));
-                $overdueList.innerHTML = overdue.length === 0 ? '<p style="color:var(--text-light);font-size:0.85rem;">None – great job! 🎉</p>' : overdue.map(i => `<div class="list-card">…</div>`).join('');
-                $upcomingList.innerHTML = upcoming.length === 0 ? '<p style="color:var(--text-light);font-size:0.85rem;">Nothing upcoming.</p>' : upcoming.map(i => `<div class="list-card">…</div>`).join('');
-            }
+                document.getElementById('stat-assignments').textContent = results[0].length;
+                document.getElementById('stat-assessments').textContent = results[1].length;
+                document.getElementById('stat-quizzes').textContent = results[2].length;
+                document.getElementById('stat-deadlines').textContent = results[3].length;
 
-            // ─────────────────────────────────
-            // TIMETABLE
-            // ─────────────────────────────────
-            async function renderTimetable() {
-                if (!currentUser) return;
-                const { data, error } = await supabase.from('timetable_slots').select('*').eq('user_id', currentUser.id).order('start_time');
-                if (error) { console.error(error); timetableSlots = []; } else timetableSlots = data || [];
-                const days = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
-                const dayKeys = ['mon','tue','wed','thu','fri','sat','sun'];
-                const times = [];
-                for (let h = 6; h <= 21; h++) {
-                    for (let m = 0; m < 60; m += 30) {
-                        if (h === 21 && m > 30) continue;
-                        times.push(`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`);
+                var now = new Date();
+                var allDated = [];
+                var types = ['assignment', 'assessment', 'quiz', 'deadline'];
+                var dateFields = ['due_date', 'exam_date', 'quiz_date', 'deadline_date'];
+                for (var i = 0; i < results.length; i++) {
+                    for (var j = 0; j < results[i].length; j++) {
+                        var item = results[i][j];
+                        allDated.push({
+                            title: item.title,
+                            course: item.course,
+                            _type: types[i],
+                            _date: item[dateFields[i]]
+                        });
                     }
                 }
-                const slotMap = {};
-                timetableSlots.forEach(s => { slotMap[s.day_of_week+'|'+s.start_time] = s; });
-                let html = '<table><thead><tr><th></th>';
-                days.forEach(d => html += `<th>${d.substring(0,3)}</th>`);
-                html += '</tr></thead><tbody>';
-                times.forEach(time => {
-                    html += `<tr><td class="time-label">${time}</td>`;
-                    dayKeys.forEach(dk => {
-                        const key = dk+'|'+time;
-                        const slot = slotMap[key];
-                        const cls = slot ? 'has-slot' : '';
-                        const label = slot ? (slot.label || slot.course || '•') : '';
-                        html += `<td class="${cls}" data-day="${dk}" data-time="${time}" data-slot-id="${slot?slot.id:''}">${label?`<span class="slot-tag">${escapeHTML(label)}</span>`:''}</td>`;
-                    });
-                    html += '</tr>';
-                });
-                html += '</tbody></table>';
-                $timetableWrap.innerHTML = html;
-                $timetableWrap.querySelectorAll('td.has-slot, td:not(.time-label):not(.has-slot)').forEach(td => {
-                    td.addEventListener('click', () => {
-                        openSlotModal(td.dataset.day, td.dataset.time, td.dataset.slotId || null);
-                    });
-                });
-            }
 
-            function openSlotModal(day, time, slotId) {
-                editingSlotId = slotId || null;
-                const existing = slotId ? timetableSlots.find(s => s.id == slotId) : null;
-                $modalSlotSheet.innerHTML = `
-                    <h3>${existing?'Edit':'Add'} Timetable Slot</h3>
-                    <div class="form-group"><label>Day</label><input value="${day}" disabled style="background:#f5f5f5;"></div>
-                    <div class="form-group"><label>Start Time</label><input value="${time}" disabled style="background:#f5f5f5;"></div>
-                    <div class="form-group"><label>End Time</label><input type="time" id="slot-end-time" value="${existing?existing.end_time:''}"></div>
-                    <div class="form-group"><label>Course</label><select id="slot-course">${COURSES.map(c=>`<option value="${c}" ${existing&&existing.course===c?'selected':''}>${c}</option>`).join('')}<option value="" ${!existing||!existing.course?'selected':''}>Other</option></select></div>
-                    <div class="form-group"><label>Custom Label</label><input id="slot-label" value="${escapeHTML(existing?existing.label||'':'')}" placeholder="e.g. Lab Session"></div>
-                    <div class="modal-actions">
-                        <button class="btn btn-outline btn-sm" id="btn-slot-cancel">Cancel</button>
-                        ${existing ? `<button class="btn btn-sm" style="background:#d32f2f;color:#fff;" id="btn-slot-delete">Delete</button>` : ''}
-                        <button class="btn btn-primary btn-sm" id="btn-slot-save">Save</button>
-                    </div>`;
-                $modalSlot.classList.add('active');
-                document.getElementById('btn-slot-cancel').addEventListener('click', () => $modalSlot.classList.remove('active'));
-                document.getElementById('btn-slot-save').addEventListener('click', saveSlot);
-                const delBtn = document.getElementById('btn-slot-delete');
-                if (delBtn) delBtn.addEventListener('click', deleteSlot);
-                $modalSlot.addEventListener('click', function(e) { if (e.target === $modalSlot) $modalSlot.classList.remove('active'); }, { once: true });
-            }
-
-            async function saveSlot() {
-                const endTime = document.getElementById('slot-end-time').value;
-                const course = document.getElementById('slot-course').value;
-                const label = document.getElementById('slot-label').value.trim();
-                const day = $modalSlotSheet.querySelectorAll('input[disabled]')[0].value;
-                const startTime = $modalSlotSheet.querySelectorAll('input[disabled]')[1].value;
-                if (!endTime) { showToast('End time required.', 'error'); return; }
-                const payload = { user_id: currentUser.id, day_of_week: day, start_time: startTime, end_time: endTime, course: course || null, label: label || null };
-                try {
-                    if (editingSlotId) {
-                        await supabase.from('timetable_slots').update(payload).eq('id', editingSlotId).eq('user_id', currentUser.id);
+                var overdue = [];
+                var upcoming = [];
+                for (var k = 0; k < allDated.length; k++) {
+                    var d = allDated[k];
+                    if (!d._date) continue;
+                    var dateObj = new Date(d._date);
+                    if (dateObj < now) {
+                        overdue.push(d);
                     } else {
-                        await supabase.from('timetable_slots').insert(payload);
+                        var diff = (dateObj - now) / 86400000;
+                        if (diff <= 7) upcoming.push(d);
                     }
-                    $modalSlot.classList.remove('active');
-                    editingSlotId = null;
-                    renderTimetable();
-                    showToast('Slot saved!', 'success');
-                } catch (e) { showToast('Error: '+e.message, 'error'); }
-            }
+                }
+                upcoming.sort(function(a, b) { return new Date(a._date) - new Date(b._date); });
 
-            async function deleteSlot() {
-                if (!editingSlotId || !confirm('Delete this slot?')) return;
-                try {
-                    await supabase.from('timetable_slots').delete().eq('id', editingSlotId).eq('user_id', currentUser.id);
-                    $modalSlot.classList.remove('active');
-                    editingSlotId = null;
-                    renderTimetable();
-                    showToast('Slot deleted', 'success');
-                } catch (e) { showToast('Delete failed: '+e.message, 'error'); }
+                if (overdue.length === 0) {
+                    $overdueList.innerHTML =
+                        '<p style="color:var(--text-light);font-size:0.85rem;">None – great job! 🎉</p>';
+                } else {
+                    var ovHtml = '';
+                    for (var o = 0; o < overdue.length; o++) {
+                        ovHtml += '<div class="list-card"><div class="item-info"><div class="item-title">' + escapeHTML(
+                            overdue[o].title) + '</div><div class="item-meta">' + overdue[o]._type + ' · ' + (overdue[o]
+                            .course || '') + '</div></div><span class="badge badge-overdue">Overdue</span></div>';
+                    }
+                    $overdueList.innerHTML = ovHtml;
+                }
+                if (upcoming.length === 0) {
+                    $upcomingList.innerHTML =
+                        '<p style="color:var(--text-light);font-size:0.85rem;">Nothing upcoming.</p>';
+                } else {
+                    var upHtml = '';
+                    for (var u = 0; u < upcoming.length; u++) {
+                        upHtml += '<div class="list-card"><div class="item-info"><div class="item-title">' + escapeHTML(
+                            upcoming[u].title) + '</div><div class="item-meta">' + upcoming[u]._type + ' · ' + (upcoming[u]
+                            .course || '') + ' · ' + new Date(upcoming[u]._date).toLocaleDateString(
+                            'en-GB') + '</div></div><span class="badge badge-upcoming">Upcoming</span></div>';
+                    }
+                    $upcomingList.innerHTML = upHtml;
+                }
+            } catch (e) {
+                console.error('Dashboard refresh error:', e);
             }
+        }
 
-            // ─────────────────────────────────
-            // CALENDAR
-            // ─────────────────────────────────
-            async function getCalendarEvents(year, month) {
-                if (!currentUser) return [];
-                const start = `${year}-${String(month+1).padStart(2,'0')}-01`;
-                const end = `${year}-${String(month+1).padStart(2,'0')}-31`;
-                const [a,b,c,d] = await Promise.all([
-                    supabase.from('assignments').select('id,title,course,due_date').eq('user_id',currentUser.id).gte('due_date',start).lte('due_date',end),
-                    supabase.from('assessments').select('id,title,course,exam_date').eq('user_id',currentUser.id).gte('exam_date',start).lte('exam_date',end),
-                    supabase.from('quizzes').select('id,title,course,quiz_date').eq('user_id',currentUser.id).gte('quiz_date',start).lte('quiz_date',end),
-                    supabase.from('deadlines').select('id,title,course,deadline_date').eq('user_id',currentUser.id).gte('deadline_date',start).lte('deadline_date',end),
+        // ────────────────────────────────────────────────
+        // TIMETABLE
+        // ────────────────────────────────────────────────
+        async function renderTimetable() {
+            if (!currentUser) return;
+            try {
+                var result = await supabase.from('timetable_slots').select('*').eq('user_id', currentUser.id).order(
+                    'start_time');
+                if (result.error) { console.error(result.error);
+                    timetableSlots = []; } else timetableSlots = result.data || [];
+            } catch (e) { timetableSlots = []; }
+
+            var days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+            var dayKeys = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+            var times = [];
+            for (var h = 6; h <= 21; h++) {
+                for (var m = 0; m < 60; m += 30) {
+                    if (h === 21 && m > 30) continue;
+                    times.push(String(h).padStart(2, '0') + ':' + String(m).padStart(2, '0'));
+                }
+            }
+            var slotMap = {};
+            for (var i = 0; i < timetableSlots.length; i++) {
+                var s = timetableSlots[i];
+                slotMap[s.day_of_week + '|' + s.start_time] = s;
+            }
+            var html = '<table><thead><tr><th></th>';
+            for (var d = 0; d < days.length; d++) html += '<th>' + days[d].substring(0, 3) + '</th>';
+            html += '</tr></thead><tbody>';
+            for (var t = 0; t < times.length; t++) {
+                var time = times[t];
+                html += '<tr><td class="time-label">' + time + '</td>';
+                for (var dk = 0; dk < dayKeys.length; dk++) {
+                    var key = dayKeys[dk] + '|' + time;
+                    var slot = slotMap[key];
+                    var cls = slot ? 'has-slot' : '';
+                    var label = slot ? (slot.label || slot.course || '•') : '';
+                    html += '<td class="' + cls + '" data-day="' + dayKeys[dk] + '" data-time="' + time +
+                        '" data-slot-id="' + (slot ? slot.id : '') + '">' + (label ? '<span class="slot-tag">' +
+                            escapeHTML(label) + '</span>' : '') + '</td>';
+                }
+                html += '</tr>';
+            }
+            html += '</tbody></table>';
+            $timetableWrap.innerHTML = html;
+
+            var cells = $timetableWrap.querySelectorAll('td.has-slot, td:not(.time-label):not(.has-slot)');
+            for (var c = 0; c < cells.length; c++) {
+                cells[c].onclick = (function(cell) {
+                    return function() {
+                        openSlotModal(cell.dataset.day, cell.dataset.time, cell.dataset.slotId || null);
+                    };
+                })(cells[c]);
+            }
+        }
+
+        function openSlotModal(day, time, slotId) {
+            editingSlotId = slotId || null;
+            var existing = null;
+            if (slotId) {
+                for (var i = 0; i < timetableSlots.length; i++) {
+                    if (timetableSlots[i].id == slotId) { existing = timetableSlots[i]; break; }
+                }
+            }
+            var courseOptions = '';
+            for (var j = 0; j < COURSES.length; j++) {
+                courseOptions += '<option value="' + COURSES[j] + '"' + (existing && existing.course === COURSES[j] ?
+                    ' selected' : '') + '>' + COURSES[j] + '</option>';
+            }
+            courseOptions += '<option value=""' + (!existing || !existing.course ? ' selected' : '') + '>Other</option>';
+
+            $modalSlotSheet.innerHTML =
+                '<h3>' + (existing ? 'Edit' : 'Add') + ' Timetable Slot</h3>' +
+                '<div class="form-group"><label>Day</label><input value="' + day +
+                '" disabled style="background:#f5f5f5;"></div>' +
+                '<div class="form-group"><label>Start Time</label><input value="' + time +
+                '" disabled style="background:#f5f5f5;"></div>' +
+                '<div class="form-group"><label>End Time</label><input type="time" id="slot-end-time" value="' + (existing ?
+                    existing.end_time : '') + '"></div>' +
+                '<div class="form-group"><label>Course</label><select id="slot-course">' + courseOptions + '</select></div>' +
+                '<div class="form-group"><label>Custom Label</label><input id="slot-label" value="' + escapeHTML(existing ?
+                    existing.label || '' : '') + '" placeholder="e.g. Lab Session"></div>' +
+                '<div class="modal-actions">' +
+                '<button class="btn btn-outline btn-sm" id="btn-slot-cancel">Cancel</button>' +
+                (existing ?
+                    '<button class="btn btn-sm" style="background:#d32f2f;color:#fff;" id="btn-slot-delete">Delete</button>' :
+                    '') +
+                '<button class="btn btn-primary btn-sm" id="btn-slot-save">Save</button>' +
+                '</div>';
+            $modalSlot.classList.add('active');
+            document.getElementById('btn-slot-cancel').onclick = function() { $modalSlot.classList.remove('active'); };
+            document.getElementById('btn-slot-save').onclick = saveSlot;
+            var delBtn = document.getElementById('btn-slot-delete');
+            if (delBtn) delBtn.onclick = deleteSlot;
+            $modalSlot.onclick = function(e) { if (e.target === $modalSlot) $modalSlot.classList.remove('active'); };
+        }
+
+        async function saveSlot() {
+            var endTime = document.getElementById('slot-end-time').value;
+            var course = document.getElementById('slot-course').value;
+            var label = document.getElementById('slot-label').value.trim();
+            var day = $modalSlotSheet.querySelectorAll('input[disabled]')[0].value;
+            var startTime = $modalSlotSheet.querySelectorAll('input[disabled]')[1].value;
+            if (!endTime) { showToast('End time required.', 'error'); return; }
+            var payload = { user_id: currentUser.id, day_of_week: day, start_time: startTime, end_time: endTime,
+                course: course || null, label: label || null };
+            try {
+                if (editingSlotId) {
+                    await supabase.from('timetable_slots').update(payload).eq('id', editingSlotId).eq('user_id',
+                        currentUser.id);
+                } else {
+                    await supabase.from('timetable_slots').insert(payload);
+                }
+                $modalSlot.classList.remove('active');
+                editingSlotId = null;
+                renderTimetable();
+                showToast('Slot saved!', 'success');
+            } catch (e) { showToast('Error: ' + e.message, 'error'); }
+        }
+
+        async function deleteSlot() {
+            if (!editingSlotId || !confirm('Delete this slot?')) return;
+            try {
+                await supabase.from('timetable_slots').delete().eq('id', editingSlotId).eq('user_id', currentUser.id);
+                $modalSlot.classList.remove('active');
+                editingSlotId = null;
+                renderTimetable();
+                showToast('Slot deleted', 'success');
+            } catch (e) { showToast('Delete failed: ' + e.message, 'error'); }
+        }
+
+        // ────────────────────────────────────────────────
+        // CALENDAR
+        // ────────────────────────────────────────────────
+        async function getCalendarEvents(year, month) {
+            if (!currentUser) return [];
+            var start = year + '-' + String(month + 1).padStart(2, '0') + '-01';
+            var end = year + '-' + String(month + 1).padStart(2, '0') + '-31';
+            try {
+                var results = await Promise.all([
+                    supabase.from('assignments').select('id,title,course,due_date').eq('user_id', currentUser.id)
+                    .gte('due_date', start).lte('due_date', end),
+                    supabase.from('assessments').select('id,title,course,exam_date').eq('user_id', currentUser.id)
+                    .gte('exam_date', start).lte('exam_date', end),
+                    supabase.from('quizzes').select('id,title,course,quiz_date').eq('user_id', currentUser.id).gte(
+                        'quiz_date', start).lte('quiz_date', end),
+                    supabase.from('deadlines').select('id,title,course,deadline_date').eq('user_id', currentUser.id)
+                    .gte('deadline_date', start).lte('deadline_date', end),
                 ]);
-                const events = [];
-                const types = ['assignment','assessment','quiz','deadline'];
-                const fields = ['due_date','exam_date','quiz_date','deadline_date'];
-                [a,b,c,d].forEach((res,i) => {
-                    if (res.data) res.data.forEach(item => events.push({...item, _type:types[i], _date:item[fields[i]]}));
-                });
+                var events = [];
+                var types = ['assignment', 'assessment', 'quiz', 'deadline'];
+                var fields = ['due_date', 'exam_date', 'quiz_date', 'deadline_date'];
+                for (var i = 0; i < results.length; i++) {
+                    if (results[i].data) {
+                        for (var j = 0; j < results[i].data.length; j++) {
+                            var item = results[i].data[j];
+                            events.push({ id: item.id, title: item.title, course: item.course, _type: types[i], _date: item[
+                                    fields[i]] });
+                        }
+                    }
+                }
                 return events;
-            }
+            } catch (e) { return []; }
+        }
 
-            async function renderCalendar() {
-                if (!currentUser) return;
-                const year = calendarDate.getFullYear();
-                const month = calendarDate.getMonth();
-                const events = await getCalendarEvents(year, month);
-                const eventMap = {};
-                events.forEach(e => { const dk = e._date.split('T')[0]; if (!eventMap[dk]) eventMap[dk] = []; eventMap[dk].push(e); });
-                const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-                $calendarNav.innerHTML = `<button id="cal-prev">←</button><span class="month-label">${monthNames[month]} ${year}</span><button id="cal-next">→</button>`;
-                document.getElementById('cal-prev').onclick = () => { calendarDate.setMonth(calendarDate.getMonth()-1); renderCalendar(); };
-                document.getElementById('cal-next').onclick = () => { calendarDate.setMonth(calendarDate.getMonth()+1); renderCalendar(); };
-                const firstDay = new Date(year, month, 1).getDay();
-                const daysInMonth = new Date(year, month+1, 0).getDate();
-                const today = new Date();
-                const todayKey = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
-                let gridHTML = '';
-                ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].forEach(d => gridHTML += `<div class="cal-header">${d}</div>`);
-                for (let i=0; i<firstDay; i++) gridHTML += '<div class="cal-day other-month"></div>';
-                for (let d=1; d<=daysInMonth; d++) {
-                    const dk = `${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-                    const hasEv = !!eventMap[dk];
-                    const isToday = dk === todayKey;
-                    const isSel = selectedCalendarDay === dk;
-                    gridHTML += `<div class="cal-day${hasEv?' has-events':''}${isToday?' today':''}${isSel?' selected':''}" data-date="${dk}">${d}</div>`;
-                }
-                $calendarGrid.innerHTML = gridHTML;
-                $calendarGrid.querySelectorAll('.cal-day:not(.other-month)').forEach(cell => {
-                    cell.addEventListener('click', () => {
+        async function renderCalendar() {
+            if (!currentUser) return;
+            var year = calendarDate.getFullYear();
+            var month = calendarDate.getMonth();
+            var events = await getCalendarEvents(year, month);
+            var eventMap = {};
+            for (var i = 0; i < events.length; i++) {
+                var dk = events[i]._date.split('T')[0];
+                if (!eventMap[dk]) eventMap[dk] = [];
+                eventMap[dk].push(events[i]);
+            }
+            var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
+                'October', 'November', 'December'
+            ];
+            $calendarNav.innerHTML =
+                '<button id="cal-prev">←</button><span class="month-label">' + monthNames[month] + ' ' + year +
+                '</span><button id="cal-next">→</button>';
+            document.getElementById('cal-prev').onclick = function() { calendarDate.setMonth(calendarDate.getMonth() -
+                    1);
+                renderCalendar(); };
+            document.getElementById('cal-next').onclick = function() { calendarDate.setMonth(calendarDate.getMonth() +
+                    1);
+                renderCalendar(); };
+            var firstDay = new Date(year, month, 1).getDay();
+            var daysInMonth = new Date(year, month + 1, 0).getDate();
+            var today = new Date();
+            var todayKey = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0') + '-' + String(today
+                .getDate()).padStart(2, '0');
+            var gridHTML = '';
+            var dayHeaders = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            for (var d = 0; d < dayHeaders.length; d++) gridHTML += '<div class="cal-header">' + dayHeaders[d] + '</div>';
+            for (var e = 0; e < firstDay; e++) gridHTML += '<div class="cal-day other-month"></div>';
+            for (var day = 1; day <= daysInMonth; day++) {
+                var dk = year + '-' + String(month + 1).padStart(2, '0') + '-' + String(day).padStart(2, '0');
+                var hasEv = !!eventMap[dk];
+                var isToday = dk === todayKey;
+                var isSel = selectedCalendarDay === dk;
+                gridHTML += '<div class="cal-day' + (hasEv ? ' has-events' : '') + (isToday ? ' today' : '') + (isSel ?
+                    ' selected' : '') + '" data-date="' + dk + '">' + day + '</div>';
+            }
+            $calendarGrid.innerHTML = gridHTML;
+            var cells = $calendarGrid.querySelectorAll('.cal-day:not(.other-month)');
+            for (var c = 0; c < cells.length; c++) {
+                cells[c].onclick = (function(cell) {
+                    return function() {
                         selectedCalendarDay = cell.dataset.date;
                         renderCalendar();
                         showDayEvents(selectedCalendarDay, eventMap);
-                    });
-                });
-                if (selectedCalendarDay) showDayEvents(selectedCalendarDay, eventMap);
-                else $dayEventsPanel.innerHTML = '<p style="color:var(--text-light);">Tap a date to see events.</p>';
+                    };
+                })(cells[c]);
             }
+            if (selectedCalendarDay) showDayEvents(selectedCalendarDay, eventMap);
+            else $dayEventsPanel.innerHTML =
+                '<p style="color:var(--text-light);font-size:0.85rem;">Tap a date to see events.</p>';
+        }
 
-            function showDayEvents(dk, eventMap) {
-                const evs = eventMap[dk] || [];
-                if (evs.length === 0) {
-                    $dayEventsPanel.innerHTML = `<p style="color:var(--text-light);">No events on ${new Date(dk+'T00:00:00').toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})}.</p>`;
-                } else {
-                    $dayEventsPanel.innerHTML = evs.map(e => `<div class="ev-item"><span class="ev-dot ${e._type}"></span><strong>${escapeHTML(e.title)}</strong>&nbsp;· ${e._type} · ${e.course||''}</div>`).join('');
+        function showDayEvents(dk, eventMap) {
+            var evs = eventMap[dk] || [];
+            if (evs.length === 0) {
+                $dayEventsPanel.innerHTML = '<p style="color:var(--text-light);font-size:0.85rem;">No events on ' + new Date(
+                    dk + 'T00:00:00').toLocaleDateString('en-GB', { day: 'numeric', month: 'long',
+                    year: 'numeric' }) + '.</p>';
+            } else {
+                var html = '';
+                for (var i = 0; i < evs.length; i++) {
+                    html += '<div class="ev-item"><span class="ev-dot ' + evs[i]._type + '"></span><strong>' + escapeHTML(evs[
+                        i].title) + '</strong> · ' + evs[i]._type + ' · ' + (evs[i].course || '') + '</div>';
                 }
+                $dayEventsPanel.innerHTML = html;
             }
+        }
 
-            async function refreshAllData() {
-                await refreshDashboardStats();
-                const activePage = document.querySelector('.page.active');
-                if (activePage) {
-                    const id = activePage.id;
-                    if (id === 'page-timetable') renderTimetable();
-                    if (id === 'page-calendar') renderCalendar();
-                    if (id === 'page-tasks') renderSubTabContent();
-                }
+        async function refreshAllData() {
+            await refreshDashboardStats();
+            var activePage = document.querySelector('.page.active');
+            if (activePage) {
+                var id = activePage.id;
+                if (id === 'page-timetable') renderTimetable();
+                if (id === 'page-calendar') renderCalendar();
+                if (id === 'page-tasks') renderSubTabContent();
             }
+        }
 
-            // ─────────────────────────────────
-            // ATTACH ALL STATIC EVENTS
-            // ─────────────────────────────────
-            function attachAllEvents() {
-                // Login button (critical: must exist)
-                if (!$btnLogin) {
-                    displayLoginError('Login button not found – page structure error.');
-                    return;
-                }
-                $btnLogin.addEventListener('click', doLogin);
-                $regInput.addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
-
-                // Bottom navigation
-                document.querySelectorAll('.bottom-nav button').forEach(btn => {
-                    btn.addEventListener('click', () => {
+        // ────────────────────────────────────────────────
+        // EVENT ATTACHMENT (called once on boot)
+        // ────────────────────────────────────────────────
+        function attachAllEvents() {
+            if (!$btnLogin) {
+                showError('Fatal: Login button not found in page.');
+                return;
+            }
+            // Login button
+            $btnLogin.onclick = function() {
+                // This MUST work – it's a simple assignment, not addEventListener
+                doLogin();
+            };
+            // Enter key on input
+            if ($regInput) {
+                $regInput.onkeydown = function(e) {
+                    if (e.key === 'Enter') doLogin();
+                };
+            }
+            // Bottom nav
+            var navButtons = document.querySelectorAll('.bottom-nav button');
+            for (var i = 0; i < navButtons.length; i++) {
+                navButtons[i].onclick = (function(btn) {
+                    return function() {
                         navigateTo(btn.dataset.page);
                         if (btn.dataset.page === 'tasks') setSubTab(currentSubTab);
-                    });
-                });
+                    };
+                })(navButtons[i]);
+            }
+            // Sub-tabs
+            var subTabButtons = $subTabs.querySelectorAll('button');
+            for (var j = 0; j < subTabButtons.length; j++) {
+                subTabButtons[j].onclick = (function(btn) {
+                    return function() { setSubTab(btn.dataset.tab); };
+                })(subTabButtons[j]);
+            }
+            // Sign out
+            if ($btnSignout) {
+                $btnSignout.onclick = function() {
+                    doSignOut().then(function() { showToast('Signed out.', ''); });
+                };
+            }
+        }
 
-                // Sub‑tabs
-                $subTabs.querySelectorAll('button').forEach(btn => {
-                    btn.addEventListener('click', () => setSubTab(btn.dataset.tab));
-                });
+        // ────────────────────────────────────────────────
+        // BOOT – runs immediately (script at end of body)
+        // ────────────────────────────────────────────────
+        function boot() {
+            // Step 1: Cache all DOM references
+            cacheDom();
 
-                // Sign out
-                if ($btnSignout) $btnSignout.addEventListener('click', () => doSignOut().then(() => showToast('Signed out.', '')));
+            // Step 2: Clear any placeholder message
+            if ($loginError) $loginError.textContent = '';
+
+            // Step 3: Attach event handlers
+            attachAllEvents();
+
+            // Step 4: Check if Supabase library loaded
+            if (typeof window.supabase === 'undefined') {
+                showError('⚠️ Network error: Supabase library failed to load.\nCheck your internet connection.');
+                return;
             }
 
-            // ─────────────────────────────────
-            // BOOT SEQUENCE (with error catching)
-            // ─────────────────────────────────
-            async function boot() {
-                try {
-                    // 1. Attach all click handlers immediately
-                    attachAllEvents();
+            // Step 5: Initialize Supabase (just creates the client – no network call)
+            try {
+                initSupabase();
+            } catch (e) {
+                showError('⚠️ ' + e.message);
+                return;
+            }
 
-                    // 2. Verify Supabase library presence
-                    if (typeof window.supabase === 'undefined') {
-                        throw new Error('Supabase SDK failed to load. Check CDN or internet connection.');
-                    }
+            // Step 6: Warn about placeholder credentials
+            if (isPlaceholderCredentials()) {
+                showError(
+                    '⚠️ Replace SUPABASE_URL and SUPABASE_ANON_KEY\nin the code with your actual Supabase project credentials.');
+            }
 
-                    // 3. Attempt to resume session
-                    const loggedIn = await checkSession();
-                    if (!loggedIn) {
-                        // Show login screen, clear any loading message
-                        $loginScreen.classList.remove('hidden');
-                        $appShell.classList.remove('active');
-                        displayLoginError(''); // clear "Initialising…"
-                    } else {
-                        displayLoginError('');
-                    }
-                } catch (e) {
-                    console.error('Boot error:', e);
-                    displayLoginError('Startup error: ' + e.message);
-                    // Ensure login screen is visible
-                    $loginScreen.classList.remove('hidden');
-                    $appShell.classList.remove('active');
+            // Step 7: Ensure login screen is visible
+            $loginScreen.classList.remove('hidden');
+            $appShell.classList.remove('active');
+
+            // Step 8: Silently check for existing session (don't block UI)
+            supabase.auth.getSession().then(function(result) {
+                if (result.data && result.data.session) {
+                    currentUser = result.data.session.user;
+                    showApp();
+                    refreshAllData();
+                    showToast('Welcome back, Vida!', 'success');
                 }
-            }
+            }).catch(function() {
+                // No session – stay on login screen, that's fine
+            });
+        }
 
-            // Start the app once DOM is ready
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', boot);
-            } else {
-                boot();
-            }
-        })();
+        // ────────────────────────────────────────────────
+        // START
+        // ────────────────────────────────────────────────
+        boot();
     </script>
 </body>
 </html>
